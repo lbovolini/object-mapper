@@ -89,3 +89,13 @@ public class StudentDTO {
         .collect(Collectors.toList());
 
 ```
+
+## Maven repository
+
+```xml
+<dependency>
+  <groupId>com.github.lbovolini</groupId>
+  <artifactId>ObjectMapper</artifactId>
+  <version>0.0.1</version>
+</dependency>
+```
