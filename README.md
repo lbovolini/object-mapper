@@ -4,13 +4,11 @@ Maps an object to another via getters and setters methods
 
 ## Features
 
-Maps DTO to Model object
-
-Maps Model to DTO object
-
-Can map any object to any object if it follows the restricions
-
-Caches objects getters and setters methods for improve performance
+- Maps DTO to Model object
+- Maps Model to DTO object
+- Maps nested objects
+- Can map any object to any object if it follows the restricions
+- Caches objects getters and setters methods for improve performance
 
 ## Restrictions
 
