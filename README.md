@@ -51,7 +51,7 @@ public class StudentDTO {
 }
 ```
 
-### Maps DTO to Model
+### 1. Maps DTO to Model
 
 ```java
     StudentDTO studentDTO = new StudentDTO();
@@ -65,7 +65,7 @@ public class StudentDTO {
     Student student = ObjectMapper.map(studentDTO, Student.class);
 ```
 
-### Maps Model to DTO
+### 2. Maps Model to DTO
 
 ```java
     Student student = new Student();
@@ -77,4 +77,15 @@ public class StudentDTO {
     student.setCourseId(courseId);
 
     StudentDTO studentDTO = ObjectMapper.map(student, StudentDTO.class);
+```
+
+### 3. Maps List
+
+```java
+    List<Discipline> disciplineList = execute(query, parameters);
+    List<DisciplineDTO> disciplineDTOList = disciplineList
+        .stream()
+        .map(discipline -> ObjectMapper.<DisciplineDTO>map(discipline, DisciplineDTO.class))
+        .collect(Collectors.toList());
+
 ```
