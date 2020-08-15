@@ -11,8 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ObjectMapper {
 
-    private static final Map<String, Map> cacheGetters;
-    private static final Map<String, Map> cacheSetters;
+    private static final Map<String, Map<String, Method>> cacheGetters;
+    private static final Map<String, Map<String, Method>> cacheSetters;
 
     static {
         cacheGetters = new ConcurrentHashMap<>();
@@ -25,77 +25,109 @@ public class ObjectMapper {
             throw new IllegalArgumentException("Object and class cannot be null");
         }
 
-        Object o = null;
-        try {
-            Constructor constructor = aClass.getConstructor();
-            o = constructor.newInstance();
-        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        Object result = o;
+        Object result = newInstance(aClass);
 
         Map<String, Method> destinationObjectSetMethods = cacheSetters.get(aClass.getName());
         Map<String, Method> originObjectGetMethods = cacheGetters.get(object.getClass().getName());
 
         if (destinationObjectSetMethods == null) {
             destinationObjectSetMethods = new ConcurrentHashMap<>();
-
-            try {
-                for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(aClass, Object.class).getPropertyDescriptors()) {
-                    Method method = propertyDescriptor.getWriteMethod();
-                    destinationObjectSetMethods.put(method.getName().substring(3).toLowerCase(), method);
-                }
-            } catch (IntrospectionException e) {
-                e.printStackTrace();
-            }
-
+            getSetters(aClass, destinationObjectSetMethods);
+            cacheSetters.put(aClass.getName(), destinationObjectSetMethods);
         }
+
         if (originObjectGetMethods == null) {
             originObjectGetMethods = new ConcurrentHashMap<>();
-
-            try {
-                for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(object.getClass(), Object.class).getPropertyDescriptors()) {
-                    Method method = propertyDescriptor.getReadMethod();
-                    originObjectGetMethods.put(method.getName().substring(3).toLowerCase(), method);
-                }
-            } catch (IntrospectionException e) {
-                e.printStackTrace();
-            }
+            getGetters(object.getClass(), originObjectGetMethods);
+            cacheGetters.put(object.getClass().getName(), originObjectGetMethods);
         }
-
-        cacheSetters.put(aClass.getName(), destinationObjectSetMethods);
-        cacheGetters.put(object.getClass().getName(), originObjectGetMethods);
 
         Map<String, Method> originObjectGetMethodsFinal = originObjectGetMethods;
 
         destinationObjectSetMethods.forEach((name, method) -> {
             try {
                 boolean nested = false;
-                Method getMethod = originObjectGetMethodsFinal.get(name);
-                if (getMethod == null) {
-                    if (name.length() > 3 && name.endsWith("dto")) {
-                        getMethod = originObjectGetMethodsFinal.get(name.substring(0, name.length() - 3));
-                    }
-                    else {
-                        getMethod = originObjectGetMethodsFinal.get(name + "dto");
-                    }
+                Method getterMethod = originObjectGetMethodsFinal.get(name);
+
+                if (getterMethod == null) {
+                    getterMethod = getGetterMethod(name, originObjectGetMethodsFinal);
                     nested = true;
                 }
-                if (getMethod == null) {
+
+                if (getterMethod == null) {
                     return;
                 }
-                Object getMethodResult = getMethod.invoke(object);
+
+                Object getterMethodResult = getterMethod.invoke(object);
 
                 if (nested) {
-                    getMethodResult = map(getMethodResult, method.getParameterTypes()[0]);
+                    getterMethodResult = map(getterMethodResult, method.getParameterTypes()[0]);
                 }
-                method.invoke(result, getMethodResult);
+
+                method.invoke(result, getterMethodResult);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         });
 
         return (T)result;
+    }
+
+    private static Method getGetterMethod(String name, Map<String, Method> objectGetters) {
+        if (name.length() > 3 && name.endsWith("dto")) {
+            return objectGetters.get(removeSuffix(name));
+        }
+        return objectGetters.get(name + "dto");
+    }
+
+    private static void getGetters(final Class<?> aClass, Map<String, Method> objectGetters) {
+        try {
+            for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(aClass, Object.class).getPropertyDescriptors()) {
+                Method method = propertyDescriptor.getReadMethod();
+                objectGetters.put(removePrefix(method.getName().toLowerCase()), method);
+            }
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void getSetters(final Class<?> aClass, Map<String, Method> objectSetters) {
+        try {
+            for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(aClass, Object.class).getPropertyDescriptors()) {
+                Method method = propertyDescriptor.getWriteMethod();
+                objectSetters.put(removePrefix(method.getName().toLowerCase()), method);
+            }
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Object newInstance(Class<?> aClass) {
+        try {
+            Constructor constructor = aClass.getConstructor();
+            return constructor.newInstance();
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // remove get or set prefix
+    private static String removePrefix(String string) {
+        if (string.length() <= 3) {
+            throw new IllegalArgumentException("Method name should have more than 3 characters");
+        }
+
+        return string.substring(3);
+    }
+
+    // remove dto suffix
+    private static String removeSuffix(String string) {
+        if (string.length() <= 3) {
+            throw new IllegalArgumentException("Method name should have more than 3 characters");
+        }
+
+        return string.substring(0, string.length() - 3);
     }
 }
