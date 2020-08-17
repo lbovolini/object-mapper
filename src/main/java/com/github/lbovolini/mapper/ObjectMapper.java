@@ -19,8 +19,12 @@ public class ObjectMapper {
 
     public static <T> T map(final Object object, final Class<?> aClass) {
 
-        if (object == null || aClass == null) {
-            throw new IllegalArgumentException("Object and class cannot be null");
+        if (object == null) {
+            return null;
+        }
+
+        if (aClass == null) {
+            throw new IllegalArgumentException("Class cannot be null");
         }
 
         if (aClass.getName().equals(object.getClass().getName())) {
