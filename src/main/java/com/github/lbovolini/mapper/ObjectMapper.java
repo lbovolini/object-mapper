@@ -86,6 +86,10 @@ public class ObjectMapper {
 
     private static <T> T map(final Object object, final String className) {
 
+        if (!(object instanceof Collection) && !(object instanceof Map)) {
+            throw new UnsupportedOperationException("Supports only Collections and Map");
+        }
+
         List resultList = new ArrayList();
         Set resultSet = new HashSet();
         Map resultMap = new HashMap();
