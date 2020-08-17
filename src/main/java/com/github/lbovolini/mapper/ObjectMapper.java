@@ -3,10 +3,8 @@ package com.github.lbovolini.mapper;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ObjectMapper {
@@ -23,6 +21,10 @@ public class ObjectMapper {
 
         if (object == null || aClass == null) {
             throw new IllegalArgumentException("Object and class cannot be null");
+        }
+
+        if (aClass.getName().equals("java.lang.String")) { // if is primitive
+            return (T)object;
         }
 
         Object result = newInstance(aClass);
@@ -45,12 +47,13 @@ public class ObjectMapper {
         Map<String, Method> originObjectGetMethodsFinal = originObjectGetMethods;
 
         destinationObjectSetMethods.forEach((name, method) -> {
+
             try {
                 boolean nested = false;
                 Method getterMethod = originObjectGetMethodsFinal.get(name);
 
                 if (getterMethod == null) {
-                    getterMethod = getGetterMethod(name, originObjectGetMethodsFinal);
+                    getterMethod = getGetterMethod(removeSuffix(name), originObjectGetMethodsFinal);
                     nested = true;
                 }
 
@@ -61,7 +64,15 @@ public class ObjectMapper {
                 Object getterMethodResult = getterMethod.invoke(object);
 
                 if (nested) {
-                    getterMethodResult = map(getterMethodResult, method.getParameterTypes()[0]);
+                    Type[] types = method.getGenericParameterTypes();
+
+                    String paramType = method.getParameterTypes()[0].getName();
+                    if (isCollection(paramType)) {
+                        String className = getClassName(types[0].getTypeName());
+                        getterMethodResult = map(getterMethodResult, className);
+                    } else {
+                        getterMethodResult = map(getterMethodResult, method.getParameterTypes()[0]);
+                    }
                 }
 
                 method.invoke(result, getterMethodResult);
@@ -73,11 +84,64 @@ public class ObjectMapper {
         return (T)result;
     }
 
-    private static Method getGetterMethod(String name, Map<String, Method> objectGetters) {
-        if (name.length() > 3 && name.endsWith("dto")) {
-            return objectGetters.get(removeSuffix(name));
+    private static <T> T map(final Object object, final String className) {
+
+
+
+        List resultList = new ArrayList();
+        Set resultSet = new HashSet();
+        Map resultMap = new HashMap();
+
+        if (object instanceof List) {
+            ((List)object).forEach(item -> {
+                try {
+                    resultList.add(map(item, Class.forName(className)));
+                } catch (ClassNotFoundException e) { e.printStackTrace(); }
+            });
+
+            return (T)resultList;
         }
-        return objectGetters.get(name + "dto");
+        if (object instanceof Set) {
+            ((Set)object).forEach(item -> {
+                try {
+                    resultSet.add(map(item, Class.forName(className)));
+                } catch (ClassNotFoundException e) { e.printStackTrace(); }
+            });
+
+            return (T)resultSet;
+        }
+
+        ((Map)object).forEach((key, value) -> {
+            try {
+                System.out.println(key);
+                String[] classNameArray = className.split(",");
+                resultMap.put(map(key, Class.forName(classNameArray[0])), map(value, Class.forName(classNameArray[1].replace(" ", ""))));
+            } catch (ClassNotFoundException e) { e.printStackTrace(); }
+        });
+
+        return (T)resultMap;
+    }
+
+    private static boolean isCollection(String paramType) {
+        return "java.util.List".equals(paramType) || "java.util.Map".equals(paramType) || "java.util.Set".equals(paramType);
+    }
+
+    private static String getClassName(String typeName) {
+        String t = typeName.substring(typeName.indexOf("<") + 1);
+        int endIndex = t.indexOf("<");
+
+        if (endIndex < 0) {
+            endIndex = t.indexOf(">");
+        }
+        return t.substring(0, endIndex);
+    }
+
+    private static Method getGetterMethod(String name, Map<String, Method> objectGetters) {
+        objectGetters.forEach((key, value) -> {
+            objectGetters.put(removeSuffix(key), value);
+        });
+
+        return objectGetters.get(name);
     }
 
     private static void getGetters(final Class<?> aClass, Map<String, Method> objectGetters) {
@@ -95,6 +159,7 @@ public class ObjectMapper {
         try {
             for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(aClass, Object.class).getPropertyDescriptors()) {
                 Method method = propertyDescriptor.getWriteMethod();
+                if (method == null) continue;
                 objectSetters.put(removePrefix(method.getName().toLowerCase()), method);
             }
         } catch (IntrospectionException e) {
@@ -124,10 +189,10 @@ public class ObjectMapper {
 
     // remove dto suffix
     private static String removeSuffix(String string) {
-        if (string.length() <= 3) {
-            throw new IllegalArgumentException("Method name should have more than 3 characters");
+        if (string == null) {
+            throw new IllegalArgumentException("String argument cannot be null");
         }
 
-        return string.substring(0, string.length() - 3);
+        return string.replace("dto", "");
     }
 }
