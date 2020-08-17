@@ -86,8 +86,6 @@ public class ObjectMapper {
 
     private static <T> T map(final Object object, final String className) {
 
-
-
         List resultList = new ArrayList();
         Set resultSet = new HashSet();
         Map resultMap = new HashMap();
@@ -113,7 +111,7 @@ public class ObjectMapper {
 
         ((Map)object).forEach((key, value) -> {
             try {
-                System.out.println(key);
+                System.out.println(value);
                 String[] classNameArray = className.split(",");
                 resultMap.put(map(key, Class.forName(classNameArray[0])), map(value, Class.forName(classNameArray[1].replace(" ", ""))));
             } catch (ClassNotFoundException e) { e.printStackTrace(); }
@@ -137,11 +135,12 @@ public class ObjectMapper {
     }
 
     private static Method getGetterMethod(String name, Map<String, Method> objectGetters) {
+        final Map<String, Method> objectGettersWithoutSuffix = new ConcurrentHashMap<>();
         objectGetters.forEach((key, value) -> {
-            objectGetters.put(removeSuffix(key), value);
+            objectGettersWithoutSuffix.put(removeSuffix(key), value);
         });
 
-        return objectGetters.get(name);
+        return objectGettersWithoutSuffix.get(name);
     }
 
     private static void getGetters(final Class<?> aClass, Map<String, Method> objectGetters) {
