@@ -412,6 +412,67 @@ class ObjectMapperTest {
     }
 
     @Test
+    void shouldConvertCourseWithMapDTOToCourseWithMapEmptyMap() {
+
+        Student student = new Student();
+        student.setId(id);
+        student.setName(name);
+        student.setEmail(email);
+        student.setPassword(password);
+        student.setBirthday(birthday);
+        student.setCourseId(courseId);
+
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(id);
+        studentDTO.setName(name);
+        studentDTO.setEmail(email);
+        studentDTO.setPassword(password);
+        studentDTO.setBirthday(birthday);
+        studentDTO.setCourseId(courseId);
+
+        int id = new Random().nextInt();
+        String name = this.name + new Random().nextInt();
+        String email = this.email + new Random().nextInt();
+        String password = this.password + new Random().nextInt();
+        LocalDate birthday = this.birthday.minusDays(new Random().nextInt());
+        int courseId = new Random().nextInt();
+
+        Student student1 = new Student();
+        student1.setId(id);
+        student1.setName(name);
+        student1.setEmail(email);
+        student1.setPassword(password);
+        student1.setBirthday(birthday);
+        student1.setCourseId(courseId);
+
+        StudentDTO studentDTO1 = new StudentDTO();
+        studentDTO1.setId(id);
+        studentDTO1.setName(name);
+        studentDTO1.setEmail(email);
+        studentDTO1.setPassword(password);
+        studentDTO1.setBirthday(birthday);
+        studentDTO1.setCourseId(courseId);
+
+        Map<String, Student> studentMap = new HashMap<>();
+
+        Map<String, StudentDTO> studentDTOMap = new HashMap<>();
+
+        CourseWithMap courseWithMap = new CourseWithMap();
+        courseWithMap.setId(courseId);
+        courseWithMap.setName(couseName);
+        courseWithMap.setStudentMap(studentMap);
+
+        CourseWithMapDTO courseWithMapDTO = new CourseWithMapDTO();
+        courseWithMapDTO.setId(courseId);
+        courseWithMapDTO.setName(couseName);
+        courseWithMapDTO.setStudentDTOMap(studentDTOMap);
+
+        CourseWithMap courseWithMap1 = ObjectMapper.map(courseWithMapDTO, CourseWithMap.class);
+
+        assertEquals(studentMap, courseWithMap1.getStudentMap());
+    }
+
+    @Test
     void performanceTest() {
 
         long start = System.nanoTime();
