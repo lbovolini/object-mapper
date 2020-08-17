@@ -3,7 +3,7 @@
   <groupId>com.github.lbovolini</groupId>
   <artifactId>ObjectMapper</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <description>
     Maps an object to another via getters and setters methods
   </description>
@@ -166,10 +166,15 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
-    <repository>
+    <!--<repository>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
       </url>
+    </repository>-->
+    <repository>
+      <id>github</id>
+      <name>GitHub lbovolini Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/lbovolini/object-mapper</url>
     </repository>
   </distributionManagement>
 </project>
