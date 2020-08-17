@@ -23,7 +23,7 @@ public class ObjectMapper {
             throw new IllegalArgumentException("Object and class cannot be null");
         }
 
-        if (aClass.getName().equals("java.lang.String")) { // if is primitive
+        if (aClass.getName().equals(object.getClass().getName())) {
             return (T)object;
         }
 
@@ -115,7 +115,6 @@ public class ObjectMapper {
 
         ((Map)object).forEach((key, value) -> {
             try {
-                System.out.println(value);
                 String[] classNameArray = className.split(",");
                 resultMap.put(map(key, Class.forName(classNameArray[0])), map(value, Class.forName(classNameArray[1].replace(" ", ""))));
             } catch (ClassNotFoundException e) { e.printStackTrace(); }
