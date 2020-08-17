@@ -1,15 +1,12 @@
 package com.github.lbovolini;
 
-import com.github.lbovolini.dto.CourseDTO;
-import com.github.lbovolini.dto.StudentDTO;
-import com.github.lbovolini.dto.StudentDTOFull;
+import com.github.lbovolini.dto.*;
 import com.github.lbovolini.mapper.ObjectMapper;
-import com.github.lbovolini.model.Course;
-import com.github.lbovolini.model.Student;
+import com.github.lbovolini.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -125,6 +122,293 @@ class ObjectMapperTest {
         assertEquals(birthday, studentDTOFull.getBirthday());
         assertEquals(courseId, studentDTOFull.getCourseId());
         assertEquals(courseDTO, studentDTOFull.getCourseDTO());
+    }
+
+    @Test
+    void shouldConvertCourseWithListToCourseWithListDTO() {
+
+        Course course = new Course();
+        course.setId(courseId);
+        course.setName(couseName);
+
+        CourseDTO courseDTO = new CourseDTO();
+        courseDTO.setId(courseId);
+        courseDTO.setName(couseName);
+
+        Student student = new Student();
+        student.setId(id);
+        student.setName(name);
+        student.setEmail(email);
+        student.setPassword(password);
+        student.setBirthday(birthday);
+        student.setCourseId(courseId);
+        student.setCourse(course);
+
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(id);
+        studentDTO.setName(name);
+        studentDTO.setEmail(email);
+        studentDTO.setPassword(password);
+        studentDTO.setBirthday(birthday);
+        studentDTO.setCourseId(courseId);
+
+        StudentDTOFull studentDTOFull = new StudentDTOFull();
+        studentDTOFull.setId(id);
+        studentDTOFull.setName(name);
+        studentDTOFull.setEmail(email);
+        studentDTOFull.setPassword(password);
+        studentDTOFull.setBirthday(birthday);
+        studentDTOFull.setCourseId(courseId);
+        studentDTOFull.setCourseDTO(courseDTO);
+
+        int id = new Random().nextInt();
+        String name = this.name + new Random().nextInt();
+        String email = this.email + new Random().nextInt();
+        String password = this.password + new Random().nextInt();
+        LocalDate birthday = this.birthday.minusDays(new Random().nextInt());
+        int courseId = new Random().nextInt();
+
+        Student student1 = new Student();
+        student1.setId(id);
+        student1.setName(name);
+        student1.setEmail(email);
+        student1.setPassword(password);
+        student1.setBirthday(birthday);
+        student1.setCourseId(courseId);
+        student1.setCourse(course);
+
+        StudentDTO studentDTO1 = new StudentDTO();
+        studentDTO1.setId(id);
+        studentDTO1.setName(name);
+        studentDTO1.setEmail(email);
+        studentDTO1.setPassword(password);
+        studentDTO1.setBirthday(birthday);
+        studentDTO1.setCourseId(courseId);
+
+        StudentDTOFull studentDTOFull1 = new StudentDTOFull();
+        studentDTOFull1.setId(id);
+        studentDTOFull1.setName(name);
+        studentDTOFull1.setEmail(email);
+        studentDTOFull1.setPassword(password);
+        studentDTOFull1.setBirthday(birthday);
+        studentDTOFull1.setCourseId(courseId);
+        studentDTOFull1.setCourseDTO(courseDTO);
+
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(student);
+        studentList.add(student1);
+
+        List<StudentDTO> studentDTOList = new ArrayList<>();
+        studentDTOList.add(studentDTO);
+        studentDTOList.add(studentDTO1);
+
+        CourseWithList courseWithList = new CourseWithList();
+        courseWithList.setId(this.courseId);
+        courseWithList.setName(couseName);
+        courseWithList.setStudentList(studentList);
+
+        CourseWitListDTO courseWitListDTO = ObjectMapper.map(courseWithList, CourseWitListDTO.class);
+
+        assertEquals(this.courseId, courseWitListDTO.getId());
+        assertEquals(couseName, courseWitListDTO.getName());
+
+        List<StudentDTO> studentDTOList1 = courseWitListDTO.getStudentDTOList();
+        assertEquals(studentDTOList, studentDTOList1);
+    }
+
+    @Test
+    void shouldConvertCourseWithSetToCourseWithSetDTO() {
+
+        Student student = new Student();
+        student.setId(id);
+        student.setName(name);
+        student.setEmail(email);
+        student.setPassword(password);
+        student.setBirthday(birthday);
+        student.setCourseId(courseId);
+
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(id);
+        studentDTO.setName(name);
+        studentDTO.setEmail(email);
+        studentDTO.setPassword(password);
+        studentDTO.setBirthday(birthday);
+        studentDTO.setCourseId(courseId);
+
+        int id = new Random().nextInt();
+        String name = this.name + new Random().nextInt();
+        String email = this.email + new Random().nextInt();
+        String password = this.password + new Random().nextInt();
+        LocalDate birthday = this.birthday.minusDays(new Random().nextInt());
+        int courseId = new Random().nextInt();
+
+        Student student1 = new Student();
+        student1.setId(id);
+        student1.setName(name);
+        student1.setEmail(email);
+        student1.setPassword(password);
+        student1.setBirthday(birthday);
+        student1.setCourseId(courseId);
+
+        StudentDTO studentDTO1 = new StudentDTO();
+        studentDTO1.setId(id);
+        studentDTO1.setName(name);
+        studentDTO1.setEmail(email);
+        studentDTO1.setPassword(password);
+        studentDTO1.setBirthday(birthday);
+        studentDTO1.setCourseId(courseId);
+
+        Set<Student> studentSet = new HashSet<>();
+        studentSet.add(student);
+        studentSet.add(student1);
+
+        Set<StudentDTO> studentDTOSet = new HashSet<>();
+        studentDTOSet.add(studentDTO);
+        studentDTOSet.add(studentDTO1);
+
+        CourseWithSet courseWithSet = new CourseWithSet();
+        courseWithSet.setId(courseId);
+        courseWithSet.setName(couseName);
+        courseWithSet.setStudentSet(studentSet);
+
+        CourseWithSetDTO courseWithSetDTO = new CourseWithSetDTO();
+        courseWithSetDTO.setId(courseId);
+        courseWithSetDTO.setName(couseName);
+        courseWithSetDTO.setStudentDTOSet(studentDTOSet);
+
+        CourseWithSetDTO courseWithSetDTO1 = ObjectMapper.map(courseWithSet, CourseWithSetDTO.class);
+
+        assertEquals(studentDTOSet, courseWithSetDTO1.getStudentDTOSet());
+    }
+
+    @Test
+    void shouldConvertCourseWithSetDTOToCourseWithSet() {
+
+        Student student = new Student();
+        student.setId(id);
+        student.setName(name);
+        student.setEmail(email);
+        student.setPassword(password);
+        student.setBirthday(birthday);
+        student.setCourseId(courseId);
+
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(id);
+        studentDTO.setName(name);
+        studentDTO.setEmail(email);
+        studentDTO.setPassword(password);
+        studentDTO.setBirthday(birthday);
+        studentDTO.setCourseId(courseId);
+
+        int id = new Random().nextInt();
+        String name = this.name + new Random().nextInt();
+        String email = this.email + new Random().nextInt();
+        String password = this.password + new Random().nextInt();
+        LocalDate birthday = this.birthday.minusDays(new Random().nextInt());
+        int courseId = new Random().nextInt();
+
+        Student student1 = new Student();
+        student1.setId(id);
+        student1.setName(name);
+        student1.setEmail(email);
+        student1.setPassword(password);
+        student1.setBirthday(birthday);
+        student1.setCourseId(courseId);
+
+        StudentDTO studentDTO1 = new StudentDTO();
+        studentDTO1.setId(id);
+        studentDTO1.setName(name);
+        studentDTO1.setEmail(email);
+        studentDTO1.setPassword(password);
+        studentDTO1.setBirthday(birthday);
+        studentDTO1.setCourseId(courseId);
+
+        Set<Student> studentSet = new HashSet<>();
+        studentSet.add(student);
+        studentSet.add(student1);
+
+        Set<StudentDTO> studentDTOSet = new HashSet<>();
+        studentDTOSet.add(studentDTO);
+        studentDTOSet.add(studentDTO1);
+
+        CourseWithSet courseWithSet = new CourseWithSet();
+        courseWithSet.setId(courseId);
+        courseWithSet.setName(couseName);
+        courseWithSet.setStudentSet(studentSet);
+
+        CourseWithSetDTO courseWithSetDTO = new CourseWithSetDTO();
+        courseWithSetDTO.setId(courseId);
+        courseWithSetDTO.setName(couseName);
+        courseWithSetDTO.setStudentDTOSet(studentDTOSet);
+
+        CourseWithSet courseWithSet1 = ObjectMapper.map(courseWithSetDTO, CourseWithSet.class);
+
+        assertEquals(studentSet, courseWithSet1.getStudentSet());
+    }
+
+    @Test
+    void shouldConvertCourseWithMapDTOToCourseWithMap() {
+
+        Student student = new Student();
+        student.setId(id);
+        student.setName(name);
+        student.setEmail(email);
+        student.setPassword(password);
+        student.setBirthday(birthday);
+        student.setCourseId(courseId);
+
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(id);
+        studentDTO.setName(name);
+        studentDTO.setEmail(email);
+        studentDTO.setPassword(password);
+        studentDTO.setBirthday(birthday);
+        studentDTO.setCourseId(courseId);
+
+        int id = new Random().nextInt();
+        String name = this.name + new Random().nextInt();
+        String email = this.email + new Random().nextInt();
+        String password = this.password + new Random().nextInt();
+        LocalDate birthday = this.birthday.minusDays(new Random().nextInt());
+        int courseId = new Random().nextInt();
+
+        Student student1 = new Student();
+        student1.setId(id);
+        student1.setName(name);
+        student1.setEmail(email);
+        student1.setPassword(password);
+        student1.setBirthday(birthday);
+        student1.setCourseId(courseId);
+
+        StudentDTO studentDTO1 = new StudentDTO();
+        studentDTO1.setId(id);
+        studentDTO1.setName(name);
+        studentDTO1.setEmail(email);
+        studentDTO1.setPassword(password);
+        studentDTO1.setBirthday(birthday);
+        studentDTO1.setCourseId(courseId);
+
+        Map<String, Student> studentMap = new HashMap<>();
+        studentMap.put(student.getName(), student);
+        studentMap.put(student1.getName(), student1);
+
+        Map<String, StudentDTO> studentDTOMap = new HashMap<>();
+        studentDTOMap.put(studentDTO.getName(), studentDTO);
+        studentDTOMap.put(studentDTO1.getName(), studentDTO1);
+
+        CourseWithMap courseWithMap = new CourseWithMap();
+        courseWithMap.setId(courseId);
+        courseWithMap.setName(couseName);
+        courseWithMap.setStudentMap(studentMap);
+
+        CourseWithMapDTO courseWithMapDTO = new CourseWithMapDTO();
+        courseWithMapDTO.setId(courseId);
+        courseWithMapDTO.setName(couseName);
+        courseWithMapDTO.setStudentDTOMap(studentDTOMap);
+
+        CourseWithMap courseWithMap1 = ObjectMapper.map(courseWithMapDTO, CourseWithMap.class);
+
+        assertEquals(studentMap, courseWithMap1.getStudentMap());
     }
 
     @Test
