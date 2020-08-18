@@ -145,6 +145,11 @@ class ObjectMapperTest {
     }
 
     @Test
+    void shouldBeNull() {
+        assertEquals(null, ObjectMapper.<Integer>map(null, Integer.class));
+    }
+
+    @Test
     void shouldConvertModelToDTO() {
 
         StudentDTO studentDTO = ObjectMapper.map(student, StudentDTO.class);
