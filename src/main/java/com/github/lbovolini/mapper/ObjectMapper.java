@@ -31,6 +31,10 @@ public class ObjectMapper {
             return (T)object;
         }
 
+        if (object instanceof Collection || object instanceof Map) {
+            return map(object, aClass.getName());
+        }
+
         Object result = newInstance(aClass);
 
         Map<String, Method> destinationObjectSetMethods = cacheSetters.get(aClass.getName());
@@ -67,9 +71,8 @@ public class ObjectMapper {
 
                 Object getterMethodResult = getterMethod.invoke(object);
 
-                if (nested) {
+                if (nested && getterMethodResult != null) {
                     Type[] types = method.getGenericParameterTypes();
-
                     String paramType = method.getParameterTypes()[0].getName();
                     if (isCollection(paramType)) {
                         String className = getClassName(types[0].getTypeName());
@@ -89,6 +92,10 @@ public class ObjectMapper {
     }
 
     private static <T> T map(final Object object, final String className) {
+
+        if (object == null) {
+            return null;
+        }
 
         if (!(object instanceof Collection) && !(object instanceof Map)) {
             throw new UnsupportedOperationException("Supports only Collections and Map");
