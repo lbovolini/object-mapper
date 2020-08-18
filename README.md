@@ -7,12 +7,13 @@ Maps an object to another via getters and setters methods
 - Maps DTO to Model object
 - Maps Model to DTO object
 - Maps nested objects
+- Maps nested Lists, Sets and Maps
 - Can map any object to any object if it follows the restricions
 - Caches objects getters and setters methods for improve performance
 
 ## Restrictions
 
-Maps only corresponding origin object field if it have getter method and destination object have correspongind setter method
+Maps only corresponding origin object field if it have getter method and destination object have corresponding setter method
 
 ## Examples
 
@@ -79,14 +80,11 @@ public class StudentDTO {
     StudentDTO studentDTO = ObjectMapper.map(student, StudentDTO.class);
 ```
 
-### 3. Maps List
+### 3. Maps List, Set and Map
 
 ```java
     List<Discipline> disciplineList = execute(query, parameters);
-    List<DisciplineDTO> disciplineDTOList = disciplineList
-        .stream()
-        .map(discipline -> ObjectMapper.<DisciplineDTO>map(discipline, DisciplineDTO.class))
-        .collect(Collectors.toList());
+    List<DisciplineDTO> disciplineDTOList = ObjectMapper.map(disciplineList, DisciplineDTO.class)
 
 ```
 
@@ -96,6 +94,6 @@ public class StudentDTO {
 <dependency>
   <groupId>com.github.lbovolini</groupId>
   <artifactId>ObjectMapper</artifactId>
-  <version>0.0.1</version>
+  <version>0.2.0</version>
 </dependency>
 ```
