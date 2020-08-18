@@ -39,7 +39,12 @@ class ObjectMapperTest {
     private static final StudentDTOFull studentDTOFull1 = new StudentDTOFull();
     private static final List<Student> studentList = new ArrayList<>();
     private static final List<StudentDTO> studentDTOList = new ArrayList<>();
+    private static final List<StudentDTOFull> studentDTOFullList = new ArrayList<>();
+    private static final List<StudentDTOFull> studentDTOFullList1 = new ArrayList<>();
     private static final CourseWithList courseWithList = new CourseWithList();
+    private static final CourseWithList courseWithList1 = new CourseWithList();
+    private static final CourseWitListDTO courseWitListDTO = new CourseWitListDTO();
+    private static final CourseWitListDTO courseWitListDTO1 = new CourseWitListDTO();
 
     static {
         student.setId(id);
@@ -114,9 +119,28 @@ class ObjectMapperTest {
         studentDTOList.add(studentDTO);
         studentDTOList.add(studentDTO1);
 
+        studentDTOFullList.add(studentDTOFull);
+        studentDTOFullList.add(studentDTOFull1);
+
+        studentDTOFullList1.add(studentDTOFull);
+        studentDTOFullList1.add(studentDTOFull1);
+
         courseWithList.setId(courseId);
         courseWithList.setName(courseName);
         courseWithList.setStudentList(studentList);
+
+        courseWithList1.setId(randId);
+        courseWithList1.setName(randName);
+        courseWithList1.setStudentList(studentList);
+
+        courseWitListDTO.setId(courseId);
+        courseWitListDTO.setName(courseName);
+        courseWitListDTO.setStudentDTOList(studentDTOFullList);
+
+        courseWitListDTO1.setId(randId);
+        courseWitListDTO1.setName(randName);
+        courseWitListDTO1.setStudentDTOList(studentDTOFullList);
+
 
     }
 
@@ -184,9 +208,9 @@ class ObjectMapperTest {
         assertEquals(courseId, courseWitListDTO.getId());
         assertEquals(courseName, courseWitListDTO.getName());
 
-        List<StudentDTO> studentDTOList1 = courseWitListDTO.getStudentDTOList();
+        List<StudentDTOFull> studentDTOList1 = courseWitListDTO.getStudentDTOList();
 
-        assertEquals(studentDTOList, studentDTOList1);
+        assertEquals(studentDTOFullList, studentDTOList1);
     }
 
     @Test
@@ -287,6 +311,38 @@ class ObjectMapperTest {
         CourseWithMap courseWithMap1 = ObjectMapper.map(courseWithMapDTO, CourseWithMap.class);
 
         assertEquals(studentMap, courseWithMap1.getStudentMap());
+    }
+
+    @Test
+    void shouldConvertListCourseWithListToListCourseWitListDTO() {
+
+        List<CourseWithList> courseWithListArrayList = new ArrayList<>();
+        courseWithListArrayList.add(courseWithList);
+        courseWithListArrayList.add(courseWithList1);
+
+        List<CourseWitListDTO> courseWitListDTOList = new ArrayList<>();
+        courseWitListDTOList.add(courseWitListDTO);
+        courseWitListDTOList.add(courseWitListDTO1);
+
+        List<CourseWitListDTO> courseWitListDTOList1 = ObjectMapper.map(courseWithListArrayList, CourseWitListDTO.class);
+
+        assertEquals(courseWitListDTOList, courseWitListDTOList1);
+    }
+
+    @Test
+    void shouldConvertListCourseWitListDTOToListCourseWitList() {
+
+        List<CourseWithList> courseWithListArrayList = new ArrayList<>();
+        courseWithListArrayList.add(courseWithList);
+        courseWithListArrayList.add(courseWithList1);
+
+        List<CourseWitListDTO> courseWitListDTOList = new ArrayList<>();
+        courseWitListDTOList.add(courseWitListDTO);
+        courseWitListDTOList.add(courseWitListDTO1);
+
+        List<CourseWithList> courseWithListList = ObjectMapper.map(courseWitListDTOList, CourseWithList.class);
+
+        assertEquals(courseWithListArrayList, courseWithListList);
     }
 
     @Test

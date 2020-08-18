@@ -5,13 +5,13 @@ import java.util.Objects;
 
 public class CourseWitListDTO extends CourseDTO {
 
-    private List<StudentDTO> studentDTOList;
+    private List<StudentDTOFull> studentDTOList;
 
-    public List<StudentDTO> getStudentDTOList() {
+    public List<StudentDTOFull> getStudentDTOList() {
         return studentDTOList;
     }
 
-    public void setStudentDTOList(List<StudentDTO> studentDTOList) {
+    public void setStudentDTOList(List<StudentDTOFull> studentDTOList) {
         this.studentDTOList = studentDTOList;
     }
 
