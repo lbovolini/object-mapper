@@ -146,7 +146,7 @@ class ObjectMapperTest {
 
     @Test
     void shouldBeNull() {
-        assertEquals(null, ObjectMapper.<Integer>map(null, Integer.class));
+        assertNull(ObjectMapper.<Integer>map(null, Integer.class));
     }
 
     @Test
