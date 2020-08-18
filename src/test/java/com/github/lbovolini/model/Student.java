@@ -1,7 +1,6 @@
 package com.github.lbovolini.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +11,7 @@ public class Student {
     private String name;
     private String email;
     private String password;
-    private LocalDate birthday;
+    //private LocalDate birthday;
     @Column(name = "Curso_id")
     private int courseId;
 
@@ -52,14 +51,6 @@ public class Student {
         this.password = password;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
     public int getCourseId() {
         return courseId;
     }
@@ -87,12 +78,11 @@ public class Student {
                 Objects.equals(name, student.name) &&
                 Objects.equals(email, student.email) &&
                 Objects.equals(password, student.password) &&
-                Objects.equals(birthday, student.birthday) &&
                 Objects.equals(course, student.course);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, birthday, course, courseId);
+        return Objects.hash(id, name, email, password, course, courseId);
     }
 }

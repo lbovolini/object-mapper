@@ -5,7 +5,7 @@ import com.github.lbovolini.mapper.ObjectMapper;
 import com.github.lbovolini.model.*;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +16,7 @@ class ObjectMapperTest {
     private static final String name = "Lucas Bovolini";
     private static final String email = "lucasbovolini@hotmail.com";
     private static final String password = "password123";
-    private static final LocalDate birthday = LocalDate.of(1994, 7, 18);
+    //private static final LocalDate birthday = LocalDate.of(1994, 7, 18);
     private static final int courseId = 1;
     private static final String courseName = "Sistemas de Informação";
 
@@ -24,7 +24,7 @@ class ObjectMapperTest {
     private static final String randName = name + new Random().nextInt();
     private static final String randEmail = email + new Random().nextInt();
     private static final String randPassword = password + new Random().nextInt();
-    private static final LocalDate randBirthday = birthday.minusDays(new Random().nextInt());
+    //private static final LocalDate randBirthday = birthday.minusDays(new Random().nextInt());
     private static final int randCourseId = new Random().nextInt();
 
     private static final Student student = new Student();
@@ -51,7 +51,7 @@ class ObjectMapperTest {
         student.setName(name);
         student.setEmail(email);
         student.setPassword(password);
-        student.setBirthday(birthday);
+        //student.setBirthday(birthday);
         student.setCourseId(courseId);
         student.setCourse(course);
 
@@ -59,7 +59,7 @@ class ObjectMapperTest {
         student1.setName(randName);
         student1.setEmail(randEmail);
         student1.setPassword(randPassword);
-        student1.setBirthday(randBirthday);
+        //student1.setBirthday(randBirthday);
         student1.setCourseId(randCourseId);
         student1.setCourse(course);
 
@@ -67,28 +67,28 @@ class ObjectMapperTest {
         studentWithoutCourse.setName(name);
         studentWithoutCourse.setEmail(email);
         studentWithoutCourse.setPassword(password);
-        studentWithoutCourse.setBirthday(birthday);
+        //studentWithoutCourse.setBirthday(birthday);
         studentWithoutCourse.setCourseId(courseId);
 
         studentWithoutCourse1.setId(randId);
         studentWithoutCourse1.setName(randName);
         studentWithoutCourse1.setEmail(randEmail);
         studentWithoutCourse1.setPassword(randPassword);
-        studentWithoutCourse1.setBirthday(randBirthday);
+        //studentWithoutCourse1.setBirthday(randBirthday);
         studentWithoutCourse1.setCourseId(randCourseId);
 
         studentDTO.setId(id);
         studentDTO.setName(name);
         studentDTO.setEmail(email);
         studentDTO.setPassword(password);
-        studentDTO.setBirthday(birthday);
+        //studentDTO.setBirthday(birthday);
         studentDTO.setCourseId(courseId);
 
         studentDTO1.setId(randId);
         studentDTO1.setName(randName);
         studentDTO1.setEmail(randEmail);
         studentDTO1.setPassword(randPassword);
-        studentDTO1.setBirthday(randBirthday);
+        //studentDTO1.setBirthday(randBirthday);
         studentDTO1.setCourseId(randCourseId);
 
         course.setId(courseId);
@@ -101,7 +101,7 @@ class ObjectMapperTest {
         studentDTOFull.setName(name);
         studentDTOFull.setEmail(email);
         studentDTOFull.setPassword(password);
-        studentDTOFull.setBirthday(birthday);
+        //studentDTOFull.setBirthday(birthday);
         studentDTOFull.setCourseId(courseId);
         studentDTOFull.setCourseDTO(courseDTO);
 
@@ -109,7 +109,7 @@ class ObjectMapperTest {
         studentDTOFull1.setName(randName);
         studentDTOFull1.setEmail(randEmail);
         studentDTOFull1.setPassword(randPassword);
-        studentDTOFull1.setBirthday(randBirthday);
+        //studentDTOFull1.setBirthday(randBirthday);
         studentDTOFull1.setCourseId(randCourseId);
         studentDTOFull1.setCourseDTO(courseDTO);
 
@@ -158,7 +158,7 @@ class ObjectMapperTest {
         assertEquals(name, studentDTO.getName());
         assertEquals(email, studentDTO.getEmail());
         assertEquals(password, studentDTO.getPassword());
-        assertEquals(birthday, studentDTO.getBirthday());
+        //assertEquals(birthday, studentDTO.getBirthday());
         assertEquals(courseId, studentDTO.getCourseId());
     }
 
@@ -171,7 +171,7 @@ class ObjectMapperTest {
         assertEquals(name, student.getName());
         assertEquals(email, student.getEmail());
         assertEquals(password, student.getPassword());
-        assertEquals(birthday, student.getBirthday());
+        //assertEquals(birthday, student.getBirthday());
         assertEquals(courseId, student.getCourseId());
     }
 
@@ -184,7 +184,7 @@ class ObjectMapperTest {
         assertEquals(name, student.getName());
         assertEquals(email, student.getEmail());
         assertEquals(password, student.getPassword());
-        assertEquals(birthday, student.getBirthday());
+        //assertEquals(birthday, student.getBirthday());
         assertEquals(courseId, student.getCourseId());
         assertEquals(course, student.getCourse());
     }
@@ -198,7 +198,7 @@ class ObjectMapperTest {
         assertEquals(name, studentDTOFull.getName());
         assertEquals(email, studentDTOFull.getEmail());
         assertEquals(password, studentDTOFull.getPassword());
-        assertEquals(birthday, studentDTOFull.getBirthday());
+        //assertEquals(birthday, studentDTOFull.getBirthday());
         assertEquals(courseId, studentDTOFull.getCourseId());
         assertEquals(courseDTO, studentDTOFull.getCourseDTO());
 
@@ -362,7 +362,7 @@ class ObjectMapperTest {
             String name = ObjectMapperTest.name + new Random().nextInt();
             String email = ObjectMapperTest.email + new Random().nextInt();
             String password = ObjectMapperTest.password + new Random().nextInt();
-            LocalDate birthday = ObjectMapperTest.birthday.minusDays(new Random().nextInt());
+            //LocalDate birthday = ObjectMapperTest.birthday.minusDays(new Random().nextInt());
             int courseId = new Random().nextInt();
 
             Student student = new Student();
@@ -370,7 +370,7 @@ class ObjectMapperTest {
             student.setName(name);
             student.setEmail(email);
             student.setPassword(password);
-            student.setBirthday(birthday);
+            //student.setBirthday(birthday);
             student.setCourseId(courseId);
 
             StudentDTO studentDTO = ObjectMapper.map(student, StudentDTO.class);
@@ -379,7 +379,7 @@ class ObjectMapperTest {
             assertEquals(name, studentDTO.getName());
             assertEquals(email, studentDTO.getEmail());
             assertEquals(password, studentDTO.getPassword());
-            assertEquals(birthday, studentDTO.getBirthday());
+            //assertEquals(birthday, studentDTO.getBirthday());
             assertEquals(courseId, studentDTO.getCourseId());
         }
 
@@ -400,7 +400,7 @@ class ObjectMapperTest {
             String name = ObjectMapperTest.name + new Random().nextInt();
             String email = ObjectMapperTest.email + new Random().nextInt();
             String password = ObjectMapperTest.password + new Random().nextInt();
-            LocalDate birthday = ObjectMapperTest.birthday.minusDays(new Random().nextInt());
+            //LocalDate birthday = ObjectMapperTest.birthday.minusDays(new Random().nextInt());
             int courseId = new Random().nextInt();
 
             Student student = new Student();
@@ -408,7 +408,7 @@ class ObjectMapperTest {
             student.setName(name);
             student.setEmail(email);
             student.setPassword(password);
-            student.setBirthday(birthday);
+            //student.setBirthday(birthday);
             student.setCourseId(courseId);
 
             StudentDTO studentDTO = new StudentDTO();
@@ -416,14 +416,14 @@ class ObjectMapperTest {
             studentDTO.setName(student.getName());
             studentDTO.setEmail(student.getEmail());
             studentDTO.setPassword(student.getPassword());
-            studentDTO.setBirthday(student.getBirthday());
+            //studentDTO.setBirthday(student.getBirthday());
             studentDTO.setCourseId(student.getCourseId());
 
             assertEquals(id, studentDTO.getId());
             assertEquals(name, studentDTO.getName());
             assertEquals(email, studentDTO.getEmail());
             assertEquals(password, studentDTO.getPassword());
-            assertEquals(birthday, studentDTO.getBirthday());
+            //assertEquals(birthday, studentDTO.getBirthday());
             assertEquals(courseId, studentDTO.getCourseId());
         }
 

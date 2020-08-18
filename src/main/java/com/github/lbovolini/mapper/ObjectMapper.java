@@ -55,7 +55,10 @@ public class ObjectMapper {
 
         Map<String, Method> originObjectGetMethodsFinal = originObjectGetMethods;
 
-        destinationObjectSetMethods.forEach((name, method) -> {
+        for (Map.Entry<String, Method> entry: destinationObjectSetMethods.entrySet()) {
+
+            String name = entry.getKey();
+            Method method = entry.getValue();
 
             try {
                 boolean nested = false;
@@ -67,7 +70,7 @@ public class ObjectMapper {
                 }
 
                 if (getterMethod == null) {
-                    return;
+                    continue;
                 }
 
                 Object getterMethodResult = getterMethod.invoke(object);
@@ -76,7 +79,7 @@ public class ObjectMapper {
                     Type[] types = method.getGenericParameterTypes();
                     String paramType = method.getParameterTypes()[0].getName();
                     if (isCollection(paramType)) {
-                        String className = getClassName(types[0].getTypeName());
+                        String className = getClassName(types[0].toString());
                         getterMethodResult = map(getterMethodResult, className);
                     } else {
                         getterMethodResult = map(getterMethodResult, method.getParameterTypes()[0]);
@@ -87,7 +90,7 @@ public class ObjectMapper {
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
-        });
+        }
 
         return (T)result;
     }
@@ -108,30 +111,31 @@ public class ObjectMapper {
         Map<Object, Object> resultMap = new HashMap<>();
 
         if (object instanceof List) {
-            ((List)object).forEach(item -> {
+            for (Object o: (List)object) {
                 try {
-                    resultList.add(map(item, Class.forName(className)));
-                } catch (ClassNotFoundException e) { e.printStackTrace(); }
-            });
+                    resultList.add(map(o, Class.forName(className)));
+                } catch (ClassNotFoundException e) {e.printStackTrace(); }
+            }
 
             return (T)resultList;
         }
         if (object instanceof Set) {
-            ((Set)object).forEach(item -> {
+            for (Object o : (Set) object) {
                 try {
-                    resultSet.add(map(item, Class.forName(className)));
-                } catch (ClassNotFoundException e) { e.printStackTrace(); }
-            });
+                    resultSet.add(map(o, Class.forName(className)));
+                } catch(ClassNotFoundException e){ e.printStackTrace(); }
+            }
 
             return (T)resultSet;
         }
 
-        ((Map)object).forEach((key, value) -> {
+        Map<Object, Object> map = ((Map)object);
+        for (Map.Entry<Object, Object> key: map.entrySet()) {
             try {
                 String[] classNameArray = className.split(",");
-                resultMap.put(map(key, Class.forName(classNameArray[0])), map(value, Class.forName(classNameArray[1].replace(" ", ""))));
+                resultMap.put(map(key.getKey(), Class.forName(classNameArray[0])), map(key.getValue(), Class.forName(classNameArray[1].replace(" ", ""))));
             } catch (ClassNotFoundException e) { e.printStackTrace(); }
-        });
+        }
 
         return (T)resultMap;
     }
@@ -152,9 +156,9 @@ public class ObjectMapper {
 
     private static Method getGetterMethod(String name, Map<String, Method> objectGetters) {
         final Map<String, Method> objectGettersWithoutSuffix = new ConcurrentHashMap<>();
-        objectGetters.forEach((key, value) -> {
-            objectGettersWithoutSuffix.put(removeSuffix(key), value);
-        });
+        for(Map.Entry<String, Method> entry: objectGetters.entrySet()) {
+            objectGettersWithoutSuffix.put(removeSuffix(entry.getKey()), entry.getValue());
+        }
 
         return objectGettersWithoutSuffix.get(name);
     }

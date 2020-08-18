@@ -1,6 +1,5 @@
 package com.github.lbovolini.dto;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class StudentDTO {
@@ -9,7 +8,6 @@ public class StudentDTO {
     private String name;
     private String email;
     private String password;
-    private LocalDate birthday;
     private int courseId;
 
     public int getId() {
@@ -44,14 +42,6 @@ public class StudentDTO {
         this.password = password;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
     public int getCourseId() {
         return courseId;
     }
@@ -69,12 +59,11 @@ public class StudentDTO {
                 courseId == studentDTO.courseId &&
                 Objects.equals(name, studentDTO.name) &&
                 Objects.equals(email, studentDTO.email) &&
-                Objects.equals(password, studentDTO.password) &&
-                Objects.equals(birthday, studentDTO.birthday);
+                Objects.equals(password, studentDTO.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, birthday, courseId);
+        return Objects.hash(id, name, email, password, courseId);
     }
 }
