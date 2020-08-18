@@ -17,6 +17,7 @@ public class ObjectMapper {
         cacheSetters = new ConcurrentHashMap<>();
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T map(final Object object, final Class<?> aClass) {
 
         if (object == null) {
@@ -91,6 +92,7 @@ public class ObjectMapper {
         return (T)result;
     }
 
+    @SuppressWarnings("unchecked")
     private static <T> T map(final Object object, final String className) {
 
         if (object == null) {
@@ -101,9 +103,9 @@ public class ObjectMapper {
             throw new UnsupportedOperationException("Supports only Collections and Map");
         }
 
-        List resultList = new ArrayList();
-        Set resultSet = new HashSet();
-        Map resultMap = new HashMap();
+        List<Object> resultList = new ArrayList<>();
+        Set<Object> resultSet = new HashSet<>();
+        Map<Object, Object> resultMap = new HashMap<>();
 
         if (object instanceof List) {
             ((List)object).forEach(item -> {
@@ -182,7 +184,7 @@ public class ObjectMapper {
 
     private static Object newInstance(Class<?> aClass) {
         try {
-            Constructor constructor = aClass.getConstructor();
+            Constructor<?> constructor = aClass.getConstructor();
             return constructor.newInstance();
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
