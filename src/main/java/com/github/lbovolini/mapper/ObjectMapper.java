@@ -111,7 +111,7 @@ public class ObjectMapper {
         Map<Object, Object> resultMap = new HashMap<>();
 
         if (object instanceof List) {
-            for (Object o: (List)object) {
+            for (Object o: (List<Object>)object) {
                 try {
                     resultList.add(map(o, Class.forName(className)));
                 } catch (ClassNotFoundException e) {e.printStackTrace(); }
@@ -120,7 +120,7 @@ public class ObjectMapper {
             return (T)resultList;
         }
         if (object instanceof Set) {
-            for (Object o : (Set) object) {
+            for (Object o : (Set<Object>) object) {
                 try {
                     resultSet.add(map(o, Class.forName(className)));
                 } catch(ClassNotFoundException e){ e.printStackTrace(); }
@@ -129,7 +129,7 @@ public class ObjectMapper {
             return (T)resultSet;
         }
 
-        Map<Object, Object> map = ((Map)object);
+        Map<Object, Object> map = ((Map<Object, Object>)object);
         for (Map.Entry<Object, Object> entry: map.entrySet()) {
             try {
                 String[] classNameArray = className.split(",");
