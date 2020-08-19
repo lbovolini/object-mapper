@@ -17,8 +17,12 @@ public class ObjectMapper {
         cacheSetters = new ConcurrentHashMap<>();
     }
 
-    @SuppressWarnings("unchecked")
     public static <T> T map(final Object object, final Class<?> aClass) {
+        return map(object, aClass, new HashSet<String>());
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T map(final Object object, final Class<?> aClass, Set<String> stackTrace) {
 
         if (object == null) {
             return null;
@@ -28,12 +32,18 @@ public class ObjectMapper {
             throw new IllegalArgumentException("Class cannot be null");
         }
 
+        String trace = object.getClass().getName() + aClass.getName();
+        if (stackTrace.contains(trace)) {
+            return null;
+        }
+        stackTrace.add(trace);
+
         if (aClass.getName().equals(object.getClass().getName())) {
             return (T)object;
         }
 
         if (object instanceof Collection || object instanceof Map) {
-            return map(object, aClass.getName());
+            return map(object, aClass.getName(), stackTrace);
         }
 
         Object result = newInstance(aClass);
@@ -80,9 +90,9 @@ public class ObjectMapper {
                     String paramType = method.getParameterTypes()[0].getName();
                     if (isCollection(paramType)) {
                         String className = getClassName(types[0].toString());
-                        getterMethodResult = map(getterMethodResult, className);
+                        getterMethodResult = map(getterMethodResult, className, stackTrace);
                     } else {
-                        getterMethodResult = map(getterMethodResult, method.getParameterTypes()[0]);
+                        getterMethodResult = map(getterMethodResult, method.getParameterTypes()[0], stackTrace);
                     }
                 }
 
@@ -96,7 +106,7 @@ public class ObjectMapper {
     }
 
     @SuppressWarnings("unchecked")
-    private static <T> T map(final Object object, final String className) {
+    private static <T> T map(final Object object, final String className, final Set<String> stackTrace) {
 
         if (object == null) {
             return null;
@@ -113,7 +123,8 @@ public class ObjectMapper {
         if (object instanceof List) {
             for (Object o: (List<Object>)object) {
                 try {
-                    resultList.add(map(o, Class.forName(className)));
+                    Set<String> stackTraceCopy = new HashSet<>(stackTrace);
+                    resultList.add(map(o, Class.forName(className), stackTraceCopy));
                 } catch (ClassNotFoundException e) {e.printStackTrace(); }
             }
 
@@ -122,7 +133,8 @@ public class ObjectMapper {
         if (object instanceof Set) {
             for (Object o : (Set<Object>) object) {
                 try {
-                    resultSet.add(map(o, Class.forName(className)));
+                    Set<String> stackTraceCopy = new HashSet<>(stackTrace);
+                    resultSet.add(map(o, Class.forName(className), stackTraceCopy));
                 } catch(ClassNotFoundException e){ e.printStackTrace(); }
             }
 
@@ -133,7 +145,8 @@ public class ObjectMapper {
         for (Map.Entry<Object, Object> entry: map.entrySet()) {
             try {
                 String[] classNameArray = className.split(",");
-                resultMap.put(map(entry.getKey(), Class.forName(classNameArray[0])), map(entry.getValue(), Class.forName(classNameArray[1].replace(" ", ""))));
+                Set<String> stackTraceCopy = new HashSet<>(stackTrace);
+                resultMap.put(map(entry.getKey(), Class.forName(classNameArray[0]), stackTraceCopy), map(entry.getValue(), Class.forName(classNameArray[1].replace(" ", "")), stackTraceCopy));
             } catch (ClassNotFoundException e) { e.printStackTrace(); }
         }
 
