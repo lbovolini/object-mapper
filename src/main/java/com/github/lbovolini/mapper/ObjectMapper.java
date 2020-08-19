@@ -167,23 +167,20 @@ public class ObjectMapper {
         try {
             for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(aClass, Object.class).getPropertyDescriptors()) {
                 Method method = propertyDescriptor.getReadMethod();
+                if (method == null) { continue; }
                 objectGetters.put(removePrefix(method.getName().toLowerCase()), method);
             }
-        } catch (IntrospectionException e) {
-            e.printStackTrace();
-        }
+        } catch (IntrospectionException e) { e.printStackTrace(); }
     }
 
     private static void getSetters(final Class<?> aClass, Map<String, Method> objectSetters) {
         try {
             for (PropertyDescriptor propertyDescriptor: Introspector.getBeanInfo(aClass, Object.class).getPropertyDescriptors()) {
                 Method method = propertyDescriptor.getWriteMethod();
-                if (method == null) continue;
+                if (method == null) { continue; }
                 objectSetters.put(removePrefix(method.getName().toLowerCase()), method);
             }
-        } catch (IntrospectionException e) {
-            e.printStackTrace();
-        }
+        } catch (IntrospectionException e) { e.printStackTrace(); }
     }
 
     private static Object newInstance(Class<?> aClass) {
