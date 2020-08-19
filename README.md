@@ -17,7 +17,7 @@ Maps only corresponding origin object field if it have getter method and destina
 
 ## Requirements
 
-- Java 1.7
+- Java 1.7+
 
 ## Examples
 
