@@ -150,6 +150,17 @@ class ObjectMapperTest {
     }
 
     @Test
+    void shouldConvertStudentToStudentEmptyDTO() {
+        StudentEmptyDTO studentEmptyDTO1 = ObjectMapper.map(student, StudentEmptyDTO.class);
+    }
+
+    @Test
+    void shouldConvertStudentEmptyDTOToStudent() {
+        StudentEmptyDTO studentEmptyDTO = new StudentEmptyDTO();
+        Student student = ObjectMapper.map(studentEmptyDTO, Student.class);
+    }
+
+    @Test
     void shouldConvertModelToDTO() {
 
         StudentDTO studentDTO = ObjectMapper.map(student, StudentDTO.class);
