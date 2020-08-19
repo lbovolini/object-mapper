@@ -362,6 +362,91 @@ class ObjectMapperTest {
     }
 
     @Test
+    void shouldConvertListCourseWithListWithStudentWithSelfToListCourseWithListWithStudentWithSelfDTO() {
+
+        CourseWithListWithStudentWithSelf courseWithListWithStudentWithSelf = new CourseWithListWithStudentWithSelf();
+        CourseWithListWithStudentWithSelf courseWithListWithStudentWithSelf1 = new CourseWithListWithStudentWithSelf();
+        StudentWithCourseWithListWithSelf studentWithCourseWithListWithSelf = new StudentWithCourseWithListWithSelf();
+        StudentWithCourseWithListWithSelf studentWithCourseWithListWithSelf1 = new StudentWithCourseWithListWithSelf();
+
+        List<StudentWithCourseWithListWithSelf> studentWithCourseWithListWithSelfList = new ArrayList<>();
+        studentWithCourseWithListWithSelfList.add(studentWithCourseWithListWithSelf);
+        studentWithCourseWithListWithSelfList.add(studentWithCourseWithListWithSelf1);
+
+        studentWithCourseWithListWithSelf.setId(id);
+        studentWithCourseWithListWithSelf.setName(name);
+        studentWithCourseWithListWithSelf.setEmail(email);
+        studentWithCourseWithListWithSelf.setPassword(password);
+        studentWithCourseWithListWithSelf.setCourseId(courseId);
+        studentWithCourseWithListWithSelf.setCourseWithListWithStudentWithSelf(courseWithListWithStudentWithSelf);
+
+        studentWithCourseWithListWithSelf1.setId(randId);
+        studentWithCourseWithListWithSelf1.setName(randName);
+        studentWithCourseWithListWithSelf1.setEmail(randEmail);
+        studentWithCourseWithListWithSelf1.setPassword(randPassword);
+        studentWithCourseWithListWithSelf1.setCourseId(randCourseId);
+        studentWithCourseWithListWithSelf1.setCourseWithListWithStudentWithSelf(courseWithListWithStudentWithSelf1);
+
+        courseWithListWithStudentWithSelf.setId(courseId);
+        courseWithListWithStudentWithSelf.setName(courseName);
+        courseWithListWithStudentWithSelf.setStudentWithCourseWithListWithSelfList(studentWithCourseWithListWithSelfList);
+
+        courseWithListWithStudentWithSelf1.setId(randId);
+        courseWithListWithStudentWithSelf1.setName(randName);
+        courseWithListWithStudentWithSelf1.setStudentWithCourseWithListWithSelfList(studentWithCourseWithListWithSelfList);
+
+        List<CourseWithListWithStudentWithSelf> courseWithListWithStudentWithSelfList = new ArrayList<>();
+        courseWithListWithStudentWithSelfList.add(courseWithListWithStudentWithSelf);
+        courseWithListWithStudentWithSelfList.add(courseWithListWithStudentWithSelf1);
+
+        CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO = new CourseWithListWithStudentWithSelfDTO();
+        CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO1 = new CourseWithListWithStudentWithSelfDTO();
+        StudentWithCourseWithListWithSelfDTO studentWithCourseWithListWithSelfDTO = new StudentWithCourseWithListWithSelfDTO();
+        StudentWithCourseWithListWithSelfDTO studentWithCourseWithListWithSelfDTO1 = new StudentWithCourseWithListWithSelfDTO();
+
+        List<StudentWithCourseWithListWithSelfDTO> studentWithCourseWithListWithSelfDTOList = new ArrayList<>();
+        studentWithCourseWithListWithSelfDTOList.add(studentWithCourseWithListWithSelfDTO);
+        studentWithCourseWithListWithSelfDTOList.add(studentWithCourseWithListWithSelfDTO1);
+
+        studentWithCourseWithListWithSelfDTO.setId(id);
+        studentWithCourseWithListWithSelfDTO.setName(name);
+        studentWithCourseWithListWithSelfDTO.setEmail(email);
+        studentWithCourseWithListWithSelfDTO.setPassword(password);
+        studentWithCourseWithListWithSelfDTO.setCourseId(courseId);
+        studentWithCourseWithListWithSelfDTO.setCourseWithListWithStudentWithSelfDTO(courseWithListWithStudentWithSelfDTO);
+
+        studentWithCourseWithListWithSelfDTO1.setId(randId);
+        studentWithCourseWithListWithSelfDTO1.setName(randName);
+        studentWithCourseWithListWithSelfDTO1.setEmail(randEmail);
+        studentWithCourseWithListWithSelfDTO1.setPassword(randPassword);
+        studentWithCourseWithListWithSelfDTO1.setCourseId(randCourseId);
+        studentWithCourseWithListWithSelfDTO1.setCourseWithListWithStudentWithSelfDTO(courseWithListWithStudentWithSelfDTO1);
+
+        courseWithListWithStudentWithSelfDTO.setId(courseId);
+        courseWithListWithStudentWithSelfDTO.setName(courseName);
+        courseWithListWithStudentWithSelfDTO.setStudentWithCourseWithListWithSelfDTOList(studentWithCourseWithListWithSelfDTOList);
+
+        courseWithListWithStudentWithSelfDTO1.setId(randId);
+        courseWithListWithStudentWithSelfDTO1.setName(randName);
+        courseWithListWithStudentWithSelfDTO1.setStudentWithCourseWithListWithSelfDTOList(studentWithCourseWithListWithSelfDTOList);
+
+        List<CourseWithListWithStudentWithSelfDTO> courseWithListWithStudentWithSelfDTOList = new ArrayList<>();
+        courseWithListWithStudentWithSelfDTOList.add(courseWithListWithStudentWithSelfDTO);
+        courseWithListWithStudentWithSelfDTOList.add(courseWithListWithStudentWithSelfDTO1);
+
+        List<CourseWithListWithStudentWithSelfDTO> courseWithListWithStudentWithSelfDTOList1 = ObjectMapper.map(courseWithListWithStudentWithSelfList, CourseWithListWithStudentWithSelfDTO.class);
+
+        assertNull(courseWithListWithStudentWithSelfDTOList1.get(0).getStudentWithCourseWithListWithSelfDTOList().get(0).getCourseWithListWithStudentWithSelfDTO());
+        assertNull(courseWithListWithStudentWithSelfDTOList1.get(0).getStudentWithCourseWithListWithSelfDTOList().get(1).getCourseWithListWithStudentWithSelfDTO());
+        assertNull(courseWithListWithStudentWithSelfDTOList1.get(1).getStudentWithCourseWithListWithSelfDTOList().get(0).getCourseWithListWithStudentWithSelfDTO());
+        assertNull(courseWithListWithStudentWithSelfDTOList1.get(1).getStudentWithCourseWithListWithSelfDTOList().get(1).getCourseWithListWithStudentWithSelfDTO());
+
+        assertEquals(courseWithListWithStudentWithSelfDTOList1.get(0), courseWithListWithStudentWithSelfDTO);
+        assertEquals(courseWithListWithStudentWithSelfDTOList1.get(1), courseWithListWithStudentWithSelfDTO1);
+        assertEquals(courseWithListWithStudentWithSelfDTOList, courseWithListWithStudentWithSelfDTOList1);
+    }
+
+    @Test
     void performanceTest() {
 
         long start = System.nanoTime();
