@@ -15,6 +15,10 @@ Maps an object to another via getters and setters methods
 
 Maps only corresponding origin object field if it have getter method and destination object have corresponding setter method
 
+## Requirements
+
+- Java 1.7
+
 ## Examples
 
 ```java
@@ -94,6 +98,6 @@ public class StudentDTO {
 <dependency>
   <groupId>com.github.lbovolini</groupId>
   <artifactId>ObjectMapper</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.2</version>
 </dependency>
 ```
