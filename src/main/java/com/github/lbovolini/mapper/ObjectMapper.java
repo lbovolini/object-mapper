@@ -130,10 +130,10 @@ public class ObjectMapper {
         }
 
         Map<Object, Object> map = ((Map)object);
-        for (Map.Entry<Object, Object> key: map.entrySet()) {
+        for (Map.Entry<Object, Object> entry: map.entrySet()) {
             try {
                 String[] classNameArray = className.split(",");
-                resultMap.put(map(key.getKey(), Class.forName(classNameArray[0])), map(key.getValue(), Class.forName(classNameArray[1].replace(" ", ""))));
+                resultMap.put(map(entry.getKey(), Class.forName(classNameArray[0])), map(entry.getValue(), Class.forName(classNameArray[1].replace(" ", ""))));
             } catch (ClassNotFoundException e) { e.printStackTrace(); }
         }
 
