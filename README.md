@@ -91,13 +91,3 @@ public class StudentDTO {
     List<DisciplineDTO> disciplineDTOList = ObjectMapper.map(disciplineList, DisciplineDTO.class)
 
 ```
-
-## Maven repository
-
-```xml
-<dependency>
-  <groupId>com.github.lbovolini</groupId>
-  <artifactId>ObjectMapper</artifactId>
-  <version>0.2.2</version>
-</dependency>
-```
