@@ -11,10 +11,12 @@ public class ObjectMapper {
 
     private static final Map<String, Map<String, Method>> cacheGetters;
     private static final Map<String, Map<String, Method>> cacheSetters;
+    private static final TypeConverter typeConverter;
 
     static {
         cacheGetters = new ConcurrentHashMap<>();
         cacheSetters = new ConcurrentHashMap<>();
+        typeConverter = new TypeConverter();
     }
 
     public static <T> T map(final Object object, final Class<?> aClass) {
@@ -85,21 +87,30 @@ public class ObjectMapper {
 
                 Object getterMethodResult = getterMethod.invoke(object);
 
+                Class<?>[] parameterTypes = method.getParameterTypes();
+
+                if (parameterTypes.length > 0) {
+                    if (!parameterTypes[0].equals(getterMethod.getReturnType())) {
+                        Class<?> from = getterMethod.getReturnType();
+                        Class<?> to = parameterTypes[0];
+                        getterMethodResult = typeConverter.converter(getterMethodResult, from, to);                    }
+                }
+
                 if (nested && getterMethodResult != null) {
                     Type[] types = method.getGenericParameterTypes();
                     String paramType = method.getParameterTypes()[0].getName();
+
                     if (isCollection(paramType)) {
                         String className = getClassName(types[0].toString());
                         getterMethodResult = map(getterMethodResult, className, stackTrace);
-                    } else {
+                    }
+                    else {
                         getterMethodResult = map(getterMethodResult, method.getParameterTypes()[0], stackTrace);
                     }
                 }
 
                 method.invoke(result, getterMethodResult);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            } catch (IllegalAccessException | InvocationTargetException e) { e.printStackTrace(); }
         }
 
         return (T)result;
