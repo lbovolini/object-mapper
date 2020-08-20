@@ -217,6 +217,44 @@ class ObjectMapperTest {
     }
 
     @Test
+    void shouldConvertStudentToStudentStringDTO() {
+
+        StudentStringDTO studentStringDTO = new StudentStringDTO();
+        studentStringDTO.setId(String.valueOf(id));
+        studentStringDTO.setName(name);
+        studentStringDTO.setEmail(email);
+        studentStringDTO.setPassword(password);
+        studentStringDTO.setCourseId(String.valueOf(courseId));
+
+        StudentStringDTO studentStringDTO1 = ObjectMapper.map(student, StudentStringDTO.class);
+
+        System.out.println(studentStringDTO1.getId());
+        assertEquals(studentStringDTO, studentStringDTO1);
+    }
+
+    @Test
+    void shouldConvertStudentStringDTOToStudent() {
+
+        Student student = new Student();
+        student.setId(id);
+        student.setName(name);
+        student.setEmail(email);
+        student.setPassword(password);
+        student.setCourseId(courseId);
+
+        StudentStringDTO studentStringDTO = new StudentStringDTO();
+        studentStringDTO.setId(String.valueOf(id));
+        studentStringDTO.setName(name);
+        studentStringDTO.setEmail(email);
+        studentStringDTO.setPassword(password);
+        studentStringDTO.setCourseId(String.valueOf(courseId));
+
+        Student student1 = ObjectMapper.map(studentStringDTO, Student.class);
+
+        assertEquals(student, student1);
+    }
+
+    @Test
     void shouldConvertCourseWithListToCourseWithListDTO() {
 
         CourseWitListDTO courseWitListDTO = ObjectMapper.map(courseWithList, CourseWitListDTO.class);
