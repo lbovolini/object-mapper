@@ -1,13 +1,10 @@
 package com.github.lbovolini.model;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
 public class CourseWithList extends Course {
 
-    @OneToMany(mappedBy = "course", fetch=FetchType.EAGER)
     private List<Student> studentList;
 
     public List<Student> getStudentList() {

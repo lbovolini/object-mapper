@@ -1,22 +1,16 @@
 package com.github.lbovolini.model;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
 public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
     private String name;
     private String email;
     private String password;
     //private LocalDate birthday;
-    @Column(name = "Curso_id")
     private int courseId;
 
-    @ManyToOne
-    @JoinColumn(name = "Curso_id", insertable = false, updatable = false)
     private Course course;
 
     public int getId() {
