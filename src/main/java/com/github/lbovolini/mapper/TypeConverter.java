@@ -34,52 +34,52 @@ public class TypeConverter {
         referenceTypes.add(BigInteger.class);
     }
 
-    public Object converter(Object object, Class<?> from, Class<?> to) {
+    public static <T> T converter(Object object, Class<?> from, Class<?> to) {
 
         if (object == null || from == null || to == null) {
-            return object;
+            return (T)object;
         }
 
         if ((!primitiveTypes.contains(from) && !referenceTypes.contains(from))
                 || (!primitiveTypes.contains(to) && !referenceTypes.contains(to))) {
-            return object;
+            return (T)object;
         }
 
         if (to.equals(String.class)) {
-            return toStringA(object, from);
+            return (T)toStringA(object, from);
         }
         if (to.equals(boolean.class) || to.equals(Boolean.class)) {
-            return toBoolean(object, from);
+            return (T)toBoolean(object, from);
         }
         if (to.equals(byte.class) || to.equals(Byte.class)) {
-            return toByte(object, from);
+            return (T)toByte(object, from);
         }
         if (to.equals(char.class) || to.equals(Character.class)) {
-            return toChar(object, from);
+            return (T)toChar(object, from);
         }
         if (to.equals(short.class) || to.equals(Short.class)) {
-            return toShort(object, from);
+            return (T)toShort(object, from);
         }
         if (to.equals(int.class) || to.equals(Integer.class)) {
-            return toInt(object, from);
+            return (T)toInt(object, from);
         }
         if (to.equals(float.class) || to.equals(Float.class)) {
-            return toFloat(object, from);
+            return (T)toFloat(object, from);
         }
         if (to.equals(double.class) || to.equals(Double.class)) {
-            return toDouble(object, from);
+            return (T)toDouble(object, from);
         }
         if (to.equals(long.class) || to.equals(Long.class)) {
-            return toLong(object, from);
+            return (T)toLong(object, from);
         }
         if (to.equals(BigDecimal.class)) {
-            return toBigDecimal(object, from);
+            return (T)toBigDecimal(object, from);
         }
         if (to.equals(BigInteger.class)) {
-            return toBigInteger(object, from);
+            return (T)toBigInteger(object, from);
         }
 
-        return object;
+        return (T)object;
     }
 
     private static String toStringA(Object object, Class<?> from) {

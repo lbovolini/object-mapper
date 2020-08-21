@@ -228,7 +228,6 @@ class ObjectMapperTest {
 
         StudentStringDTO studentStringDTO1 = ObjectMapper.map(student, StudentStringDTO.class);
 
-        System.out.println(studentStringDTO1.getId());
         assertEquals(studentStringDTO, studentStringDTO1);
     }
 
@@ -490,7 +489,7 @@ class ObjectMapperTest {
         long start = System.nanoTime();
         int repeat = 1_000_000;
 
-        for (int i = 0; i < repeat; i++) {
+       // for (int i = 0; i < repeat; i++) {
 
             int id = new Random().nextInt();
             String name = ObjectMapperTest.name + new Random().nextInt();
@@ -515,7 +514,7 @@ class ObjectMapperTest {
             assertEquals(password, studentDTO.getPassword());
             //assertEquals(birthday, studentDTO.getBirthday());
             assertEquals(courseId, studentDTO.getCourseId());
-        }
+       // }
 
         long end = System.nanoTime();
 
@@ -528,7 +527,7 @@ class ObjectMapperTest {
         long start = System.nanoTime();
         int repeat = 1_000_000;
 
-        for (int i = 0; i < repeat; i++) {
+       // for (int i = 0; i < repeat; i++) {
 
             int id = new Random().nextInt();
             String name = ObjectMapperTest.name + new Random().nextInt();
@@ -559,7 +558,7 @@ class ObjectMapperTest {
             assertEquals(password, studentDTO.getPassword());
             //assertEquals(birthday, studentDTO.getBirthday());
             assertEquals(courseId, studentDTO.getCourseId());
-        }
+        //}
 
         long end = System.nanoTime();
 
