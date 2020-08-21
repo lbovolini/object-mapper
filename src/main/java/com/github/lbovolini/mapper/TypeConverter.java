@@ -275,6 +275,9 @@ public class TypeConverter {
         else if (from.equals(BigInteger.class)) {
             return Long.valueOf(object.toString());
         }
+        else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
+            return (boolean)object ? (long)1 : 0;
+        }
 
         return (long)object;
     }
