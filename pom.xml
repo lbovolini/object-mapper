@@ -3,7 +3,7 @@
   <groupId>com.github.lbovolini</groupId>
   <artifactId>object-mapper</artifactId>
   <packaging>jar</packaging>
-  <version>0.3.1-SNAPSHOT</version>
+  <version>0.3.0-SNAPSHOT</version>
   <description>
     Maps an object to another via getters and setters methods
   </description>
@@ -108,6 +108,12 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>5.5.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.4.16.Final</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
