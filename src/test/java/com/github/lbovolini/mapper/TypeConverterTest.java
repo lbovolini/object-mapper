@@ -2,6 +2,8 @@ package com.github.lbovolini.mapper;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TypeConverterTest {
@@ -350,7 +352,7 @@ class TypeConverterTest {
 
     @Test
     void shouldConvertBooleanObjectToString() {
-        String s = TypeConverter.converter(true, Boolean.class, String.class);
+        String s = TypeConverter.converter(Boolean.TRUE, Boolean.class, String.class);
         assertEquals("1", s);
     }
 
@@ -362,7 +364,31 @@ class TypeConverterTest {
 
     @Test
     void shouldConvertBooleanObjectToStringImplicit() {
-        String s = TypeConverter.converter(true, String.class);
+        String s = TypeConverter.converter(Boolean.TRUE, String.class);
         assertEquals("1", s);
+    }
+
+    @Test
+    void shouldConvertBooleanToBigDecimal() {
+        BigDecimal bigDecimal = TypeConverter.converter(true, boolean.class, BigDecimal.class);
+        assertEquals(new BigDecimal(1), bigDecimal);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToBigDecimal() {
+        BigDecimal bigDecimal = TypeConverter.converter(Boolean.TRUE, Boolean.class, BigDecimal.class);
+        assertEquals(new BigDecimal(1), bigDecimal);
+    }
+
+    @Test
+    void shouldConvertBooleanToBigDecimalImplicit() {
+        BigDecimal bigDecimal = TypeConverter.converter(true, BigDecimal.class);
+        assertEquals(new BigDecimal(1), bigDecimal);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToBigDecimalImplicit() {
+        BigDecimal bigDecimal = TypeConverter.converter(Boolean.TRUE, BigDecimal.class);
+        assertEquals(new BigDecimal(1), bigDecimal);
     }
 }
