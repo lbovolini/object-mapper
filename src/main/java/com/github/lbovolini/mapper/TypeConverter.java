@@ -34,6 +34,7 @@ public class TypeConverter {
         referenceTypes.add(BigInteger.class);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T converter(Object object, Class<?> from, Class<?> to) {
 
         if (object == null || from == null || to == null) {
