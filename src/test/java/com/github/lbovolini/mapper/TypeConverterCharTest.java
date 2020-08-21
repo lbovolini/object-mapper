@@ -145,8 +145,56 @@ class TypeConverterCharTest {
     }
 
     @Test
-    void shouldConvertObjectCharToShortObjectImplicit() {
+    void shouldConvertCharObjectToShortObjectImplicit() {
         Short s = TypeConverter.converter( '1', Short.class);
         assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertCharToInt() {
+        int i = TypeConverter.converter('1', char.class, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharObjectToInt() {
+        int i = TypeConverter.converter('1', Character.class, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharToIntObject() {
+        Integer i = TypeConverter.converter('1', char.class, Integer.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharObjectToIntObject() {
+        Integer i = TypeConverter.converter('1', Character.class, Integer.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharToIntImplicit() {
+        int i = TypeConverter.converter('1', char.class, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharObjectToIntImplicit() {
+        int i = TypeConverter.converter('1', Character.class, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharToIntObjectImplicit() {
+        Integer i = TypeConverter.converter('1', char.class, Integer.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharObjectToIntObjectImplicit() {
+        Integer i = TypeConverter.converter('1', Character.class, Integer.class);
+        assertEquals(1, i);
     }
 }
