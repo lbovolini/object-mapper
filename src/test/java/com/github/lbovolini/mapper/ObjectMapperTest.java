@@ -1,7 +1,6 @@
-package com.github.lbovolini;
+package com.github.lbovolini.mapper;
 
 import com.github.lbovolini.dto.*;
-import com.github.lbovolini.mapper.ObjectMapper;
 import com.github.lbovolini.model.*;
 import org.junit.jupiter.api.Test;
 
