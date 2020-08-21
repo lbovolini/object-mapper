@@ -10,6 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class TypeConverterTest {
 
     @Test
+    void shouldBeNull() {
+        assertNull(TypeConverter.converter(null, boolean.class, byte.class));
+    }
+    
+    @Test
     void shouldConvertBooleanToByte() {
         byte b = TypeConverter.converter(true, boolean.class, byte.class);
         assertEquals((byte)1, b);
