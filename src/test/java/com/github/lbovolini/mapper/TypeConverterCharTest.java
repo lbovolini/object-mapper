@@ -53,4 +53,52 @@ class TypeConverterCharTest {
         Boolean bool = TypeConverter.converter('1', Boolean.class);
         assertEquals(true, bool);
     }
+
+    @Test
+    void shouldConvertCharToByte() {
+        byte b = TypeConverter.converter('1', char.class, byte.class);
+        assertEquals((byte)1, b);
+    }
+
+    @Test
+    void shouldConvertCharObjectToByte() {
+        byte b = TypeConverter.converter('1', Character.class, byte.class);
+        assertEquals((byte)1, b);
+    }
+
+    @Test
+    void shouldConvertCharToByteObject() {
+        Byte b = TypeConverter.converter('1', char.class, Byte.class);
+        assertEquals((byte)1, b);
+    }
+
+    @Test
+    void shouldConvertCharObjectToByteObject() {
+        Byte b = TypeConverter.converter('1', Character.class, Byte.class);
+        assertEquals((byte)1, b);
+    }
+
+    @Test
+    void shouldConvertCharToByteImplicit() {
+        byte b = TypeConverter.converter('1', byte.class);
+        assertEquals((byte)1, b);
+    }
+
+    @Test
+    void shouldConvertCharObjectToByteImplicit() {
+        byte b = TypeConverter.converter('1', byte.class);
+        assertEquals((byte)1, b);
+    }
+
+    @Test
+    void shouldConvertCharToByteObjectImplicit() {
+        Byte b = TypeConverter.converter('1', Byte.class);
+        assertEquals((byte)1, b);
+    }
+
+    @Test
+    void shouldConvertCharObjectToByteObjectImplicit() {
+        Byte b = TypeConverter.converter('1', Byte.class);
+        assertEquals((byte)1, b);
+    }
 }
