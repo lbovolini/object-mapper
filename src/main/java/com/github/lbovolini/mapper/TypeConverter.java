@@ -221,6 +221,9 @@ public class TypeConverter {
         else if (from.equals(BigInteger.class)) {
             return Integer.valueOf(object.toString());
         }
+        else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
+            return (boolean)object ? 1 : 0;
+        }
 
         return (int)object;
     }
