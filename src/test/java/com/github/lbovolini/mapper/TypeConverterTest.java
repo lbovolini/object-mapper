@@ -149,4 +149,52 @@ class TypeConverterTest {
         Short s = TypeConverter.converter(Boolean.TRUE, Short.class);
         assertEquals((short)1, s);
     }
+
+    @Test
+    void shouldConvertBooleanToInt() {
+        int i = TypeConverter.converter(true, boolean.class, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToInt() {
+        int i = TypeConverter.converter(Boolean.TRUE, Boolean.class, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertBooleanToIntObject() {
+        Integer i = TypeConverter.converter(true, boolean.class, Integer.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToIntObject() {
+        Integer i = TypeConverter.converter(Boolean.TRUE, Boolean.class, Integer.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertBooleanToIntImplicit() {
+        int i = TypeConverter.converter(true, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToIntImplicit() {
+        int i = TypeConverter.converter(Boolean.TRUE, int.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertBooleanToIntObjectImplicit() {
+        Integer i = TypeConverter.converter(true, Integer.class);
+        assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToIntObjectImplicit() {
+        Integer i = TypeConverter.converter(Boolean.TRUE, Integer.class);
+        assertEquals(1, i);
+    }
 }
