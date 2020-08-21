@@ -3,6 +3,7 @@ package com.github.lbovolini.mapper;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -390,5 +391,29 @@ class TypeConverterTest {
     void shouldConvertBooleanObjectToBigDecimalImplicit() {
         BigDecimal bigDecimal = TypeConverter.converter(Boolean.TRUE, BigDecimal.class);
         assertEquals(new BigDecimal(1), bigDecimal);
+    }
+
+    @Test
+    void shouldConvertBooleanToBigInteger() {
+        BigInteger bigInteger = TypeConverter.converter(true, boolean.class, BigInteger.class);
+        assertEquals(BigInteger.ONE, bigInteger);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToBigInteger() {
+        BigInteger bigInteger = TypeConverter.converter(Boolean.TRUE, Boolean.class, BigInteger.class);
+        assertEquals(BigInteger.ONE, bigInteger);
+    }
+
+    @Test
+    void shouldConvertBooleanToBigIntegerImplicit() {
+        BigInteger bigInteger = TypeConverter.converter(true, BigInteger.class);
+        assertEquals(BigInteger.ONE, bigInteger);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToBigIntegerImplicit() {
+        BigInteger bigInteger = TypeConverter.converter(Boolean.TRUE, BigInteger.class);
+        assertEquals(BigInteger.ONE, bigInteger);
     }
 }
