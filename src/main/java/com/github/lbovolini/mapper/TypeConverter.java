@@ -168,6 +168,9 @@ public class TypeConverter {
         else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
             return (boolean)object ? (short)1 : (short)0;
         }
+        if (from.equals(char.class) || from.equals(Character.class)) {
+            return Short.valueOf(String.valueOf(object));
+        }
 
         return (short)object;
     }
