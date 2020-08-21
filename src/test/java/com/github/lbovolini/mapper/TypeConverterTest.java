@@ -54,5 +54,53 @@ class TypeConverterTest {
         assertEquals((byte)1, b);
     }
 
+    @Test
+    void shouldConvertBooleanToChar() {
+        char c = TypeConverter.converter(true, boolean.class, char.class);
+        assertEquals('1', c);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToChar() {
+        char c = TypeConverter.converter(Boolean.TRUE, Boolean.class, char.class);
+        assertEquals('1', c);
+    }
+
+    @Test
+    void shouldConvertBooleanToCharObject() {
+        Character c = TypeConverter.converter(true, boolean.class, Character.class);
+        assertEquals('1', c);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToCharObject() {
+        Character c = TypeConverter.converter(Boolean.TRUE, Boolean.class, Character.class);
+        assertEquals('1', c);
+    }
+
+    @Test
+    void shouldConvertBooleanToCharImplicit() {
+        char c = TypeConverter.converter(true, char.class);
+        assertEquals('1', c);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToCharImplicit() {
+        char c = TypeConverter.converter(Boolean.TRUE, char.class);
+        assertEquals('1', c);
+    }
+
+    @Test
+    void shouldConvertBooleanToCharObjectImplicit() {
+        Character c = TypeConverter.converter(true, Character.class);
+        assertEquals('1', c);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToCharObjectImplicit() {
+        Character c = TypeConverter.converter(Boolean.TRUE, Character.class);
+        assertEquals('1', c);
+    }
+
 
 }
