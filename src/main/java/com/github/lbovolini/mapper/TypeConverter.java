@@ -294,7 +294,7 @@ public class TypeConverter {
             return new BigDecimal(object.toString());
         }
         else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
-            return new BigDecimal((int)object);
+            return new BigDecimal(toInt(object, from));
         }
         else if (from.equals(byte.class) || from.equals(Byte.class)) {
             return new BigDecimal((byte)object);
