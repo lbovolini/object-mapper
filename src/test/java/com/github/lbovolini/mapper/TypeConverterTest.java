@@ -245,4 +245,52 @@ class TypeConverterTest {
         Float f = TypeConverter.converter(Boolean.TRUE, Float.class);
         assertEquals(1, f);
     }
+
+    @Test
+    void shouldConvertBooleanToDouble() {
+        double d = TypeConverter.converter(true, boolean.class, double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToDouble() {
+        double d = TypeConverter.converter(Boolean.TRUE, Boolean.class, double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertBooleanToDoubleObject() {
+        Double d = TypeConverter.converter(true, boolean.class, Double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToDoubleObject() {
+        Double d = TypeConverter.converter(Boolean.TRUE, Boolean.class, Double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertBooleanToDoubleImplicit() {
+        double d = TypeConverter.converter(true, boolean.class, double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToDoubleImplicit() {
+        double d = TypeConverter.converter(Boolean.TRUE, Boolean.class, double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertBooleanToDoubleObjectImplicit() {
+        Double d = TypeConverter.converter(true, boolean.class, Double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToDoubleObjectImplicit() {
+        Double d = TypeConverter.converter(Boolean.TRUE, Boolean.class, Double.class);
+        assertEquals(1.0, d);
+    }
 }
