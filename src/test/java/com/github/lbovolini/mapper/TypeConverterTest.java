@@ -341,4 +341,28 @@ class TypeConverterTest {
         Long l = TypeConverter.converter(Boolean.TRUE, Long.class);
         assertEquals(1, l);
     }
+
+    @Test
+    void shouldConvertBooleanToString() {
+        String s = TypeConverter.converter(true, boolean.class, String.class);
+        assertEquals("1", s);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToString() {
+        String s = TypeConverter.converter(true, Boolean.class, String.class);
+        assertEquals("1", s);
+    }
+
+    @Test
+    void shouldConvertBooleanToStringImplicit() {
+        String s = TypeConverter.converter(true, String.class);
+        assertEquals("1", s);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToStringImplicit() {
+        String s = TypeConverter.converter(true, String.class);
+        assertEquals("1", s);
+    }
 }
