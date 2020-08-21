@@ -167,6 +167,9 @@ public class TypeConverter {
         else if (from.equals(BigInteger.class)) {
             return Byte.valueOf(object.toString());
         }
+        else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
+            return (byte) ((boolean) object ? 1 : 0);
+        }
 
         return (byte)object;
     }
