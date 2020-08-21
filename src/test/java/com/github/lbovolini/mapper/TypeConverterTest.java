@@ -293,4 +293,52 @@ class TypeConverterTest {
         Double d = TypeConverter.converter(Boolean.TRUE, Boolean.class, Double.class);
         assertEquals(1.0, d);
     }
+
+    @Test
+    void shouldConvertBooleanToLong() {
+        long l = TypeConverter.converter(true, boolean.class, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToLong() {
+        long l = TypeConverter.converter(Boolean.TRUE, Boolean.class, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertBooleanToLongObject() {
+        Long l = TypeConverter.converter(true, boolean.class, Long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToLongObject() {
+        Long l = TypeConverter.converter(Boolean.TRUE, Boolean.class, Long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertBooleanToLongImplicit() {
+        long l = TypeConverter.converter(true, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToLongImplicit() {
+        long l = TypeConverter.converter(Boolean.TRUE, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertBooleanToLongObjectImplicit() {
+        Long l = TypeConverter.converter(true, Long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToLongObjectImplicit() {
+        Long l = TypeConverter.converter(Boolean.TRUE, Long.class);
+        assertEquals(1, l);
+    }
 }
