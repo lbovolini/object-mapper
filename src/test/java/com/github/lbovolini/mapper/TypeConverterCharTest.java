@@ -101,4 +101,52 @@ class TypeConverterCharTest {
         Byte b = TypeConverter.converter('1', Byte.class);
         assertEquals((byte)1, b);
     }
+
+    @Test
+    void shouldConvertCharToShort() {
+        short s = TypeConverter.converter( '1', char.class, short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertCharObjectToShort() {
+        short s = TypeConverter.converter( '1', Character.class, short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertCharToShortObject() {
+        Short s = TypeConverter.converter( '1', char.class, Short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertObjectCharToShortObject() {
+        Short s = TypeConverter.converter( '1', Character.class, Short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertCharToShortImplicit() {
+        short s = TypeConverter.converter( '1', short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertCharObjectToShortImplicit() {
+        short s = TypeConverter.converter( '1', short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertCharToShortObjectImplicit() {
+        Short s = TypeConverter.converter( '1', Short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertObjectCharToShortObjectImplicit() {
+        Short s = TypeConverter.converter( '1', Short.class);
+        assertEquals((short)1, s);
+    }
 }
