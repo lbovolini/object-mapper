@@ -329,6 +329,9 @@ public class TypeConverter {
         else if (from.equals(BigDecimal.class)) {
             return new BigInteger(object.toString());
         }
+        else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
+            return BigInteger.valueOf(toLong(object, from));
+        }
 
         return BigInteger.valueOf((long)object);
     }
