@@ -133,7 +133,7 @@ public class TypeConverter {
             return (byte) ((boolean) object ? 1 : 0);
         }
 
-        return (byte)object;
+        return Byte.valueOf(String.valueOf(object));
     }
 
     private static Character toChar(Object object, Class<?> from) {
