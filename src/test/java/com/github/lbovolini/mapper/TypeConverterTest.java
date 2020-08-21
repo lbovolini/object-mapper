@@ -197,4 +197,52 @@ class TypeConverterTest {
         Integer i = TypeConverter.converter(Boolean.TRUE, Integer.class);
         assertEquals(1, i);
     }
+
+    @Test
+    void shouldConvertBooleanToFloat() {
+        float f = TypeConverter.converter(true, boolean.class, float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToFloat() {
+        float f = TypeConverter.converter(Boolean.TRUE, Boolean.class, float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertBooleanToFloatObject() {
+        Float f = TypeConverter.converter(true, boolean.class, Float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToFloatObject() {
+        Float f = TypeConverter.converter(Boolean.TRUE, Boolean.class, Float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertBooleanToFloatImplicit() {
+        float f = TypeConverter.converter(true, float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToFloatImplicit() {
+        float f = TypeConverter.converter(Boolean.TRUE, float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertBooleanToFloatObjectImplicit() {
+        Float f = TypeConverter.converter(true, Float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToFloatObjectImplicit() {
+        Float f = TypeConverter.converter(Boolean.TRUE, Float.class);
+        assertEquals(1, f);
+    }
 }
