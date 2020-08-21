@@ -111,6 +111,9 @@ public class TypeConverter {
         if (from.equals(BigInteger.class)) {
             return Boolean.valueOf(object.toString());
         }
+        if (from.equals(char.class) || from.equals(Character.class)) {
+            return object.equals('1');
+        }
 
         return (boolean)object;
     }
