@@ -203,6 +203,9 @@ public class TypeConverter {
         else if (from.equals(BigInteger.class)) {
             return Short.valueOf(object.toString());
         }
+        else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
+            return (boolean)object ? (short)1 : (short)0;
+        }
 
         return (short)object;
     }
