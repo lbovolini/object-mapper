@@ -82,6 +82,56 @@ public class TypeConverter {
         return (T)object;
     }
 
+    public static <T> T converter(Object object, Class<?> to) {
+
+        Class<?> from = object.getClass();
+
+        if (object == null || from == null || to == null) {
+            return (T)object;
+        }
+
+        if ((!primitiveTypes.contains(from) && !referenceTypes.contains(from))
+                || (!primitiveTypes.contains(to) && !referenceTypes.contains(to))) {
+            return (T)object;
+        }
+
+        if (to.equals(String.class)) {
+            return (T)toStringA(object, from);
+        }
+        if (to.equals(boolean.class) || to.equals(Boolean.class)) {
+            return (T)toBoolean(object, from);
+        }
+        if (to.equals(byte.class) || to.equals(Byte.class)) {
+            return (T)toByte(object, from);
+        }
+        if (to.equals(char.class) || to.equals(Character.class)) {
+            return (T)toChar(object, from);
+        }
+        if (to.equals(short.class) || to.equals(Short.class)) {
+            return (T)toShort(object, from);
+        }
+        if (to.equals(int.class) || to.equals(Integer.class)) {
+            return (T)toInt(object, from);
+        }
+        if (to.equals(float.class) || to.equals(Float.class)) {
+            return (T)toFloat(object, from);
+        }
+        if (to.equals(double.class) || to.equals(Double.class)) {
+            return (T)toDouble(object, from);
+        }
+        if (to.equals(long.class) || to.equals(Long.class)) {
+            return (T)toLong(object, from);
+        }
+        if (to.equals(BigDecimal.class)) {
+            return (T)toBigDecimal(object, from);
+        }
+        if (to.equals(BigInteger.class)) {
+            return (T)toBigInteger(object, from);
+        }
+
+        return (T)object;
+    }
+
     private static String toStringA(Object object, Class<?> from) {
 
         if (referenceTypes.contains(from)) {
