@@ -137,6 +137,9 @@ public class TypeConverter {
         if (referenceTypes.contains(from)) {
             return object.toString();
         }
+        else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
+            return (boolean)object ? "1" : "0";
+        }
 
         return String.valueOf(object);
     }
