@@ -102,5 +102,51 @@ class TypeConverterTest {
         assertEquals('1', c);
     }
 
+    @Test
+    void shouldConvertBooleanToShort() {
+        short s = TypeConverter.converter(true, boolean.class, short.class);
+        assertEquals((short)1, s);
+    }
 
+    @Test
+    void shouldConvertBooleanObjectToShort() {
+        short s = TypeConverter.converter(Boolean.TRUE, Boolean.class, short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertBooleanToShortObject() {
+        Short s = TypeConverter.converter(true, boolean.class, Short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToShortObject() {
+        Short s = TypeConverter.converter(Boolean.TRUE, Boolean.class, Short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertBooleanToShortImplicit() {
+        short s = TypeConverter.converter(true, short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToShortImplicit() {
+        short s = TypeConverter.converter(Boolean.TRUE, short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertBooleanToShortObjectImplicit() {
+        Short s = TypeConverter.converter(true, Short.class);
+        assertEquals((short)1, s);
+    }
+
+    @Test
+    void shouldConvertBooleanObjectToShortObjectImplicit() {
+        Short s = TypeConverter.converter(Boolean.TRUE, Short.class);
+        assertEquals((short)1, s);
+    }
 }
