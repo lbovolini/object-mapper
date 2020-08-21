@@ -7,13 +7,13 @@ import java.math.BigInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TypeConverterTest {
+class TypeConverterBooleanTest {
 
     @Test
     void shouldBeNull() {
         assertNull(TypeConverter.converter(null, boolean.class, byte.class));
     }
-    
+
     @Test
     void shouldConvertBooleanToByte() {
         byte b = TypeConverter.converter(true, boolean.class, byte.class);
