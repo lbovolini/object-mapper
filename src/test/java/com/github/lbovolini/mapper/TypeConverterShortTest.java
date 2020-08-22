@@ -88,7 +88,7 @@ class TypeConverterShortTest {
     }
 
     @Test
-    void shouldConvertShorObjecttToCharImplicit() {
+    void shouldConvertShortObjectToCharImplicit() {
         char c = TypeConverter.converter((short)1, char.class);
         assertEquals('1', c);
     }
