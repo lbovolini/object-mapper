@@ -245,4 +245,52 @@ class TypeConverterCharTest {
         Float f = TypeConverter.converter('1', Float.class);
         assertEquals(1, f);
     }
+
+    @Test
+    void shouldConvertCharToDouble() {
+        double d = TypeConverter.converter('1', char.class, double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertCharObjectToDouble() {
+        double d = TypeConverter.converter('1', Character.class, double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertCharToDoubleObject() {
+        Double d = TypeConverter.converter('1', char.class, Double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertCharObjectToDoubleObject() {
+        Double d = TypeConverter.converter('1', Character.class, Double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertCharToDoubleImplicit() {
+        double d = TypeConverter.converter('1', double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertCharObjectToDoubleImplicit() {
+        double d = TypeConverter.converter('1', double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertCharToDoubleObjectImplicit() {
+        Double d = TypeConverter.converter('1', Double.class);
+        assertEquals(1.0, d);
+    }
+
+    @Test
+    void shouldConvertCharObjectToDoubleObjectImplicit() {
+        Double d = TypeConverter.converter('1', Double.class);
+        assertEquals(1.0, d);
+    }
 }
