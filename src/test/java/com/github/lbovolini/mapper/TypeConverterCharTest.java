@@ -293,4 +293,52 @@ class TypeConverterCharTest {
         Double d = TypeConverter.converter('1', Double.class);
         assertEquals(1.0, d);
     }
+
+    @Test
+    void shouldConvertCharToLong() {
+        long l = TypeConverter.converter('1', char.class, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharObjectToLong() {
+        long l = TypeConverter.converter('1', Character.class, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharToLongObject() {
+        Long l = TypeConverter.converter('1', char.class, Long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharObjectToLongObject() {
+        Long l = TypeConverter.converter('1', Character.class, Long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharToLongImplicit() {
+        long l = TypeConverter.converter('1', char.class, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharObjectToLongImplicit() {
+        long l = TypeConverter.converter('1', Character.class, long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharToLongObjectImplicit() {
+        Long l = TypeConverter.converter('1', char.class, Long.class);
+        assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharObjectToLongObjectImplicit() {
+        Long l = TypeConverter.converter('1', Character.class, Long.class);
+        assertEquals(1, l);
+    }
 }
