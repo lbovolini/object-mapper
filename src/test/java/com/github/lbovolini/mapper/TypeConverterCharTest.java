@@ -176,25 +176,73 @@ class TypeConverterCharTest {
 
     @Test
     void shouldConvertCharToIntImplicit() {
-        int i = TypeConverter.converter('1', char.class, int.class);
+        int i = TypeConverter.converter('1', int.class);
         assertEquals(1, i);
     }
 
     @Test
     void shouldConvertCharObjectToIntImplicit() {
-        int i = TypeConverter.converter('1', Character.class, int.class);
+        int i = TypeConverter.converter('1', int.class);
         assertEquals(1, i);
     }
 
     @Test
     void shouldConvertCharToIntObjectImplicit() {
-        Integer i = TypeConverter.converter('1', char.class, Integer.class);
+        Integer i = TypeConverter.converter('1', Integer.class);
         assertEquals(1, i);
     }
 
     @Test
     void shouldConvertCharObjectToIntObjectImplicit() {
-        Integer i = TypeConverter.converter('1', Character.class, Integer.class);
+        Integer i = TypeConverter.converter('1', Integer.class);
         assertEquals(1, i);
+    }
+
+    @Test
+    void shouldConvertCharToFloat() {
+        float f = TypeConverter.converter('1', char.class, float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertCharObjectToFloat() {
+        float f = TypeConverter.converter('1', Character.class, float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertCharToFloatObject() {
+        Float f = TypeConverter.converter('1', char.class, Float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertCharObjectToFloatObject() {
+        Float f = TypeConverter.converter('1', Character.class, Float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertCharToFloatImplicit() {
+        float f = TypeConverter.converter('1', float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertCharObjectToFloatImplicit() {
+        float f = TypeConverter.converter('1', float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertCharToFloatObjectImplicit() {
+        Float f = TypeConverter.converter('1', Float.class);
+        assertEquals(1, f);
+    }
+
+    @Test
+    void shouldConvertCharObjectToFloatObjectImplicit() {
+        Float f = TypeConverter.converter('1', Float.class);
+        assertEquals(1, f);
     }
 }
