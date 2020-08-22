@@ -210,6 +210,9 @@ public class TypeConverter {
         else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
             return (boolean)object ? (float)1.0 : (float)0.0;
         }
+        if (from.equals(char.class) || from.equals(Character.class)) {
+            return Float.valueOf(String.valueOf(object));
+        }
 
         return (float)object;
     }
