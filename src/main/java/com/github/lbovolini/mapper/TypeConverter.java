@@ -231,6 +231,9 @@ public class TypeConverter {
         else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
             return (boolean)object ? 1.0 : 0.0;
         }
+        if (from.equals(char.class) || from.equals(Character.class)) {
+            return Double.valueOf(String.valueOf(object));
+        }
 
         return (double)object;
     }
