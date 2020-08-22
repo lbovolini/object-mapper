@@ -2,6 +2,8 @@ package com.github.lbovolini.mapper;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TypeConverterCharTest {
@@ -340,5 +342,29 @@ class TypeConverterCharTest {
     void shouldConvertCharObjectToLongObjectImplicit() {
         Long l = TypeConverter.converter('1', Character.class, Long.class);
         assertEquals(1, l);
+    }
+
+    @Test
+    void shouldConvertCharToBigDecimal() {
+        BigDecimal bigDecimal = TypeConverter.converter('1', char.class, BigDecimal.class);
+        assertEquals(BigDecimal.ONE, bigDecimal);
+    }
+
+    @Test
+    void shouldConvertCharObjectToBigDecimal() {
+        BigDecimal bigDecimal = TypeConverter.converter('1', Character.class, BigDecimal.class);
+        assertEquals(BigDecimal.ONE, bigDecimal);
+    }
+
+    @Test
+    void shouldConvertCharToBigDecimalImplicit() {
+        BigDecimal bigDecimal = TypeConverter.converter('1', BigDecimal.class);
+        assertEquals(BigDecimal.ONE, bigDecimal);
+    }
+
+    @Test
+    void shouldConvertCharObjectToBigDecimalImplicit() {
+        BigDecimal bigDecimal = TypeConverter.converter('1', BigDecimal.class);
+        assertEquals(BigDecimal.ONE, bigDecimal);
     }
 }
