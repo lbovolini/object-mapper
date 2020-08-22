@@ -114,6 +114,9 @@ public class TypeConverter {
         if (from.equals(char.class) || from.equals(Character.class)) {
             return object.equals('1');
         }
+        if (from.equals(short.class) || from.equals(Short.class)) {
+            return object.equals((short)1);
+        }
 
         return (boolean)object;
     }
