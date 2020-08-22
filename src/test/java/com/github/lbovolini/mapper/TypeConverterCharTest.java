@@ -345,6 +345,30 @@ class TypeConverterCharTest {
     }
 
     @Test
+    void shoulConvertCharToString() {
+        String s = TypeConverter.converter('1', char.class, String.class);
+        assertEquals("1", s);
+    }
+
+    @Test
+    void shoulConvertCharObjectToString() {
+        String s = TypeConverter.converter('1', Character.class, String.class);
+        assertEquals("1", s);
+    }
+
+    @Test
+    void shoulConvertCharToStringImplicit() {
+        String s = TypeConverter.converter('1', String.class);
+        assertEquals("1", s);
+    }
+
+    @Test
+    void shoulConvertCharObjectToStringImplicit() {
+        String s = TypeConverter.converter('1', String.class);
+        assertEquals("1", s);
+    }
+
+    @Test
     void shouldConvertCharToBigDecimal() {
         BigDecimal bigDecimal = TypeConverter.converter('1', char.class, BigDecimal.class);
         assertEquals(BigDecimal.ONE, bigDecimal);
