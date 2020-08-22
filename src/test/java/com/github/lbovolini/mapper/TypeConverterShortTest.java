@@ -105,9 +105,6 @@ class TypeConverterShortTest {
         assertEquals('1', c);
     }
 
-
-
-
     @Test
     void shouldConvertShortToByte() {
         byte b = TypeConverter.converter((short)1, short.class, byte.class);
