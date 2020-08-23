@@ -115,6 +115,44 @@
   <url>http://maven.apache.org</url>
 
   <profiles>
+    <profile>
+      <id>ossrh</id>
+      <activation>
+        <property>
+          <name>sonatype</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <properties>
+      </properties>
+      <distributionManagement>
+        <repository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>github</id>
+      <activation>
+        <property>
+          <name>!sonatype</name>
+        </property>
+      </activation>
+      <properties>
+      </properties>
+      <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>GitHub lbovolini Apache Maven Packages</name>
+          <url>https://maven.pkg.github.com/lbovolini/object-mapper</url>
+        </repository>
+      </distributionManagement>
+    </profile>
     <!--<profile>
       <id>sign-artifacts</id>
       <activation>
@@ -147,21 +185,4 @@
       </build>
     </profile>-->
   </profiles>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <!--<repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
-      </url>
-    </repository>-->
-    <repository>
-      <id>github</id>
-      <name>GitHub lbovolini Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/lbovolini/object-mapper</url>
-    </repository>
-  </distributionManagement>
 </project>
