@@ -117,6 +117,9 @@ public class TypeConverter {
         if (from.equals(short.class) || from.equals(Short.class)) {
             return object.equals((short)1);
         }
+        if (from.equals(int.class) || from.equals(Integer.class)) {
+            return object.equals(1);
+        }
 
         return (boolean)object;
     }
