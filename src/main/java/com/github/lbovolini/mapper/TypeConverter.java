@@ -183,6 +183,9 @@ public class TypeConverter {
         if (from.equals(char.class) || from.equals(Character.class)) {
             return Short.valueOf(String.valueOf(object));
         }
+        if (from.equals(int.class) || from.equals(Integer.class)) {
+            return Short.valueOf(String.valueOf(object));
+        }
 
         return (short)object;
     }
