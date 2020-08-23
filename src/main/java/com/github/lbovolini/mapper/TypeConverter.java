@@ -141,6 +141,9 @@ public class TypeConverter {
         else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
             return (byte) ((boolean) object ? 1 : 0);
         }
+        if (from.equals(float.class) || from.equals(Float.class)) {
+            return ((Float)object).byteValue();
+        }
 
         return Byte.valueOf(String.valueOf(object));
     }
