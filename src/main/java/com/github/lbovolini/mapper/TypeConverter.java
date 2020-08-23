@@ -279,6 +279,9 @@ public class TypeConverter {
         if (from.equals(int.class) || from.equals(Integer.class)) {
             return Double.valueOf(String.valueOf(object));
         }
+        if (from.equals(float.class) || from.equals(Float.class)) {
+            return ((Float)object).doubleValue();
+        }
 
         return (double)object;
     }
