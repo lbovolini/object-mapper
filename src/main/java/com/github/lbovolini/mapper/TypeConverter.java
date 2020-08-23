@@ -150,6 +150,9 @@ public class TypeConverter {
         if (from.equals(float.class) || from.equals(Float.class)) {
             return ((Float)object).byteValue();
         }
+        if (from.equals(double.class) || from.equals(Double.class)) {
+            return (byte)(double)object;
+        }
 
         return Byte.valueOf(String.valueOf(object));
     }
