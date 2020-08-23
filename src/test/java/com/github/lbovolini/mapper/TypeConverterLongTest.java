@@ -60,13 +60,13 @@ class TypeConverterLongTest {
     @Test
     void shouldConvertLongToChar() {
         char c = TypeConverter.converter((long)1, long.class, char.class);
-        assertEquals(1, c);
+        assertEquals('1', c);
     }
 
     @Test
     void shouldConvertLongObjectToChar() {
         char c = TypeConverter.converter((long)1, Long.class, char.class);
-        assertEquals(1, c);
+        assertEquals('1', c);
     }
 
     @Test
