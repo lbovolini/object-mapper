@@ -180,6 +180,9 @@ public class TypeConverter {
         if (from.equals(byte.class) || from.equals(Byte.class)) {
             return String.valueOf(object).charAt(0);
         }
+        if (from.equals(double.class) || from.equals(Double.class)) {
+            return String.valueOf(object).charAt(0);
+        }
 
         return (char)object;
     }
