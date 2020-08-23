@@ -189,6 +189,9 @@ public class TypeConverter {
         if (from.equals(double.class) || from.equals(Double.class)) {
             return String.valueOf(object).charAt(0);
         }
+        if (from.equals(long.class) || from.equals(Long.class)) {
+            return (char)(long)1;
+        }
 
         return (char)object;
     }
