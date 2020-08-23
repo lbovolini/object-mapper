@@ -298,6 +298,9 @@ public class TypeConverter {
         if (from.equals(double.class) || from.equals(Double.class)) {
             return (float)(double)object;
         }
+        if (from.equals(long.class) || from.equals(Long.class)) {
+            return (float)(long)1;
+        }
 
 
         return (float)object;
