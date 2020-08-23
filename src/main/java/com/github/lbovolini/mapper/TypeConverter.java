@@ -216,6 +216,10 @@ public class TypeConverter {
         if (from.equals(byte.class) || from.equals(Byte.class)) {
             return (short)(byte)object;
         }
+        if (from.equals(double.class) || from.equals(Double.class)) {
+            return (short)(double)object;
+        }
+
 
         return (short)object;
     }
