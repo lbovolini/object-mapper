@@ -190,7 +190,7 @@ public class TypeConverter {
             return String.valueOf(object).charAt(0);
         }
         if (from.equals(long.class) || from.equals(Long.class)) {
-            return (char)(long)1;
+            return String.valueOf(object).charAt(0);
         }
 
         return (char)object;
