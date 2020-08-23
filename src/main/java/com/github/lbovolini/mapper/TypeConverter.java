@@ -129,6 +129,9 @@ public class TypeConverter {
         if (from.equals(double.class) || from.equals(Double.class)) {
             return object.equals(1.0);
         }
+        if (from.equals(long.class) || from.equals(Long.class)) {
+            return object.equals((long)1);
+        }
 
         return (boolean)object;
     }
