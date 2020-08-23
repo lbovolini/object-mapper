@@ -335,6 +335,9 @@ public class TypeConverter {
         if (from.equals(byte.class) || from.equals(Byte.class)) {
             return (double)(byte)object;
         }
+        if (from.equals(long.class) || from.equals(Long.class)) {
+            return (double)(long)1;
+        }
 
         return (double)object;
     }
