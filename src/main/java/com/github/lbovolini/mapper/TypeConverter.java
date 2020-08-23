@@ -222,6 +222,9 @@ public class TypeConverter {
         if (from.equals(short.class) || from.equals(Short.class)) {
             return Integer.valueOf(String.valueOf(object));
         }
+        if (from.equals(float.class) || from.equals(Float.class)) {
+            return ((Float)object).intValue();
+        }
 
         return (int)object;
     }
