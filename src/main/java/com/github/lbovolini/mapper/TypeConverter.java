@@ -159,6 +159,9 @@ public class TypeConverter {
         if (from.equals(short.class) || from.equals(Short.class)) {
             return String.valueOf(object).charAt(0);
         }
+        if (from.equals(int.class) || from.equals(Integer.class)) {
+            return String.valueOf(object).charAt(0);
+        }
 
         return (char)object;
     }
