@@ -3,7 +3,7 @@
   <groupId>com.github.lbovolini</groupId>
   <artifactId>object-mapper</artifactId>
   <packaging>jar</packaging>
-  <version>1.1.41-SNAPSHOT</version>
+  <version>1.1.49-SNAPSHOT</version>
   <description>
     Maps an object to another via getters and setters methods
   </description>
