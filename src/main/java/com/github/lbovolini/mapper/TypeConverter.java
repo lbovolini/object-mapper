@@ -126,6 +126,9 @@ public class TypeConverter {
         if (from.equals(byte.class) || from.equals(Byte.class)) {
             return object.equals((byte)1);
         }
+        if (from.equals(double.class) || from.equals(Double.class)) {
+            return object.equals(1.0);
+        }
 
         return (boolean)object;
     }
