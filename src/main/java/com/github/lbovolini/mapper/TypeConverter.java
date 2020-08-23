@@ -234,6 +234,9 @@ public class TypeConverter {
         if (from.equals(short.class) || from.equals(Short.class)) {
             return Float.valueOf(String.valueOf(object));
         }
+        if (from.equals(int.class) || from.equals(Integer.class)) {
+            return Float.valueOf(String.valueOf(object));
+        }
 
         return (float)object;
     }
