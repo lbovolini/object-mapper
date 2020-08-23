@@ -396,6 +396,9 @@ public class TypeConverter {
         else if (from.equals(float.class) || from.equals(Float.class)) {
             return BigInteger.valueOf(((Float)object).longValue());
         }
+        if (from.equals(byte.class) || from.equals(Byte.class)) {
+            return BigInteger.valueOf(Long.parseLong(String.valueOf(object)));
+        }
 
         return BigInteger.valueOf((long)object);
     }
