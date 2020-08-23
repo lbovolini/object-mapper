@@ -330,6 +330,9 @@ public class TypeConverter {
         if (from.equals(float.class) || from.equals(Float.class)) {
             return ((Float)object).longValue();
         }
+        if (from.equals(byte.class) || from.equals(Byte.class)) {
+            return (long)(byte)object;
+        }
 
         return (long)object;
     }
