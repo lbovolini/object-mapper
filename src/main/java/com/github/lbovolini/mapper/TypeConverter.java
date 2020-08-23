@@ -204,6 +204,9 @@ public class TypeConverter {
         if (from.equals(float.class) || from.equals(Float.class)) {
             return ((Float)object).shortValue();
         }
+        if (from.equals(byte.class) || from.equals(Byte.class)) {
+            return (short)(byte)object;
+        }
 
         return (short)object;
     }
