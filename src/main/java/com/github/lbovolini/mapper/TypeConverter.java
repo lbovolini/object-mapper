@@ -120,6 +120,9 @@ public class TypeConverter {
         if (from.equals(int.class) || from.equals(Integer.class)) {
             return object.equals(1);
         }
+        if (from.equals(float.class) || from.equals(Float.class)) {
+            return object.equals((float)1);
+        }
 
         return (boolean)object;
     }
