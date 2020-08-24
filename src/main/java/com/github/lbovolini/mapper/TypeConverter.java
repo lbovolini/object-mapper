@@ -109,7 +109,7 @@ public class TypeConverter {
             return object.equals(BigDecimal.ONE);
         }
         if (from.equals(BigInteger.class)) {
-            return Boolean.valueOf(object.toString());
+            return object.equals(BigInteger.ONE);
         }
         if (from.equals(char.class) || from.equals(Character.class)) {
             return object.equals('1');
