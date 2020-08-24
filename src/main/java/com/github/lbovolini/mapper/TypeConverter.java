@@ -103,7 +103,7 @@ public class TypeConverter {
     private static Boolean toBoolean(Object object, Class<?> from) {
 
         if (from.equals(String.class)) {
-            return Boolean.valueOf((String)object);
+            return object.equals("1");
         }
         if (from.equals(BigDecimal.class)) {
             return Boolean.valueOf(object.toString());
