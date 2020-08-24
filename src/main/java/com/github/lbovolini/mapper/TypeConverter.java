@@ -443,6 +443,9 @@ public class TypeConverter {
         if (from.equals(double.class) || from.equals(Double.class)) {
             return BigInteger.valueOf((long)(double)object);
         }
+        if (from.equals(BigInteger.class)) {
+            return (BigInteger)object;
+        }
 
         return BigInteger.valueOf((long)object);
     }
