@@ -106,7 +106,7 @@ public class TypeConverter {
             return object.equals("1");
         }
         if (from.equals(BigDecimal.class)) {
-            return Boolean.valueOf(object.toString());
+            return object.equals(BigDecimal.ONE);
         }
         if (from.equals(BigInteger.class)) {
             return Boolean.valueOf(object.toString());
