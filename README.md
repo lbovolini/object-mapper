@@ -1,5 +1,8 @@
 # ObjectMapper
 
+![CI](https://github.com/lbovolini/object-mapper/workflows/CI/badge.svg)  [![Coverage Status](https://coveralls.io/repos/github/lbovolini/object-mapper/badge.svg?branch=master)](https://coveralls.io/github/lbovolini/object-mapper?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 Maps an object to another via getters and setters methods
 
 ## Features
