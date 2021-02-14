@@ -25,4 +25,4 @@ jobs:
       - name: Run tests
         env:
           COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-        run: mvn test
+        run: mvn test jacoco:report coveralls:report
