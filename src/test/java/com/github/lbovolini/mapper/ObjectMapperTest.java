@@ -2,6 +2,8 @@ package com.github.lbovolini.mapper;
 
 import com.github.lbovolini.dto.*;
 import com.github.lbovolini.model.*;
+import com.github.lbovolini.object.ObjectBool;
+import com.github.lbovolini.primitive.PrimitiveBool;
 import org.junit.jupiter.api.Test;
 
 //import java.time.LocalDate;
@@ -146,6 +148,54 @@ class ObjectMapperTest {
     @Test
     void shouldBeNull() {
         assertNull(ObjectMapper.<Integer>map(null, Integer.class));
+    }
+
+    @Test
+    void shouldConvertPrimitiveTypeToBoxed() {
+        PrimitiveTypeDTO primitiveTypeDTO = new PrimitiveTypeDTO(false, (byte) 1, 'A', (short) 2, 3, 4.4f, 5.5d, 6L);
+        BoxedPrimitiveType expectedOutput = new BoxedPrimitiveType(false, (byte) 1, 'A', (short) 2, 3, 4.4f, 5.5d, 6L);
+
+        BoxedPrimitiveType boxedPrimitiveType = ObjectMapper.map(primitiveTypeDTO, BoxedPrimitiveType.class);
+
+        assertEquals(expectedOutput, boxedPrimitiveType);
+    }
+
+    @Test
+    void shouldConvertBoxedTypeToPrimitive() {
+        BoxedPrimitiveType boxedPrimitiveType = new BoxedPrimitiveType(false, (byte) 1, 'A', (short) 2, 3, 4.4f, 5.5d, 6L);
+        PrimitiveTypeDTO expectedOutput = new PrimitiveTypeDTO(false, (byte) 1, 'A', (short) 2, 3, 4.4f, 5.5d, 6L);
+
+        PrimitiveTypeDTO primitiveTypeDTO = ObjectMapper.map(boxedPrimitiveType, PrimitiveTypeDTO.class);
+
+        assertEquals(expectedOutput, primitiveTypeDTO);
+    }
+
+    @Test
+    void shouldConvertUninitialisedPrimitiveTypeToBoxed() {
+        PrimitiveTypeDTO primitiveTypeDTO = new PrimitiveTypeDTO();
+        BoxedPrimitiveType expectedOutput = new BoxedPrimitiveType(false, (byte) 0, '\u0000', (short) 0, 0, 0.0f, 0.0d, 0L);
+
+        BoxedPrimitiveType boxedPrimitiveType = ObjectMapper.map(primitiveTypeDTO, BoxedPrimitiveType.class);
+
+        assertEquals(expectedOutput, boxedPrimitiveType);
+    }
+
+    @Test
+    void shouldConvertUninitialisedBoxedTypeToPrimitive() {
+        BoxedPrimitiveType boxedPrimitiveType = new BoxedPrimitiveType();
+        PrimitiveTypeDTO expectedOutput = new PrimitiveTypeDTO();
+
+        PrimitiveTypeDTO primitiveTypeDTO = ObjectMapper.map(boxedPrimitiveType, PrimitiveTypeDTO.class);
+
+        assertEquals(expectedOutput, primitiveTypeDTO);
+    }
+
+    @Test
+    void shouldConvertNullBooleanObjectToPrimitive() {
+        ObjectBool objectBool = new ObjectBool(null);
+        PrimitiveBool expectedPrimitiveOutput = new PrimitiveBool();
+
+        assertEquals(expectedPrimitiveOutput, ObjectMapper.map(objectBool, PrimitiveBool.class));
     }
 
     @Test
@@ -563,4 +613,5 @@ class ObjectMapperTest {
 
         System.out.println((end - start) / 1_000_000_000.0);
     }
+
 }
