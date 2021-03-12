@@ -11,7 +11,7 @@ class TypeConverterBooleanTest {
 
     @Test
     void shouldBeNull() {
-        assertNull(TypeConverter.converter(null, boolean.class, byte.class));
+        assertNull(TypeConverter.converter(null, Boolean.class, Byte.class));
     }
 
     @Test
