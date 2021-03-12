@@ -20,14 +20,14 @@ public class TypeConverter {
         primitiveTypes.add(double.class);
         primitiveTypes.add(long.class);
 
-        primitiveTypes.add(Boolean.class);
-        primitiveTypes.add(Byte.class);
-        primitiveTypes.add(Character.class);
-        primitiveTypes.add(Short.class);
-        primitiveTypes.add(Integer.class);
-        primitiveTypes.add(Float.class);
-        primitiveTypes.add(Double.class);
-        primitiveTypes.add(Long.class);
+        referenceTypes.add(Boolean.class);
+        referenceTypes.add(Byte.class);
+        referenceTypes.add(Character.class);
+        referenceTypes.add(Short.class);
+        referenceTypes.add(Integer.class);
+        referenceTypes.add(Float.class);
+        referenceTypes.add(Double.class);
+        referenceTypes.add(Long.class);
 
         referenceTypes.add(String.class);
         referenceTypes.add(BigDecimal.class);
@@ -37,13 +37,19 @@ public class TypeConverter {
     @SuppressWarnings("unchecked")
     public static <T> T converter(Object object, Class<?> from, Class<?> to) {
 
-        if (object == null || from == null || to == null) {
+        if (from == null || to == null) {
             return (T)object;
         }
 
         if ((!primitiveTypes.contains(from) && !referenceTypes.contains(from))
                 || (!primitiveTypes.contains(to) && !referenceTypes.contains(to))) {
             return (T)object;
+        }
+
+        boolean isReturnTypePrimitive = primitiveTypes.contains(to);
+
+        if (!isReturnTypePrimitive && object == null) {
+            return null;
         }
 
         if (to.equals(String.class)) {
@@ -90,17 +96,22 @@ public class TypeConverter {
 
     private static String toStringA(Object object, Class<?> from) {
 
+        if (from.equals(boolean.class) || from.equals(Boolean.class)) {
+            return (boolean)object ? "1" : "0";
+        }
+
         if (referenceTypes.contains(from)) {
             return object.toString();
-        }
-        else if (from.equals(boolean.class) || from.equals(Boolean.class)) {
-            return (boolean)object ? "1" : "0";
         }
 
         return String.valueOf(object);
     }
 
     private static Boolean toBoolean(Object object, Class<?> from) {
+
+        if (object == null) {
+            return Boolean.FALSE;
+        }
 
         if (from.equals(String.class)) {
             return object.equals("1");
@@ -138,6 +149,10 @@ public class TypeConverter {
 
     private static Byte toByte(Object object, Class<?> from) {
 
+        if (object == null) {
+            return (byte) 0;
+        }
+
         if (from.equals(String.class)) {
             return Byte.valueOf((String)object);
         }
@@ -161,6 +176,10 @@ public class TypeConverter {
     }
 
     private static Character toChar(Object object, Class<?> from) {
+
+        if (object == null) {
+            return '\u0000';
+        }
 
         if (from.equals(String.class)) {
             return ((String) object).charAt(0);
@@ -197,6 +216,10 @@ public class TypeConverter {
     }
 
     private static Short toShort(Object object, Class<?> from) {
+
+        if (object == null) {
+            return (short) 0;
+        }
 
         if (from.equals(String.class)) {
             return Short.valueOf((String)object);
@@ -235,6 +258,10 @@ public class TypeConverter {
 
     private static Integer toInt(Object object, Class<?> from) {
 
+        if (object == null) {
+            return 0;
+        }
+
         if (from.equals(String.class)) {
             return Integer.valueOf((String) object);
         }
@@ -270,6 +297,10 @@ public class TypeConverter {
     }
 
     private static Float toFloat(Object object, Class<?> from) {
+
+        if (object == null) {
+            return 0.0f;
+        }
 
         if (from.equals(String.class)) {
             return Float.valueOf((String)object);
@@ -308,6 +339,10 @@ public class TypeConverter {
 
     private static Double toDouble(Object object, Class<?> from) {
 
+        if (object == null) {
+            return 0.0d;
+        }
+
         if (from.equals(String.class)) {
             return Double.valueOf((String)object);
         }
@@ -343,6 +378,10 @@ public class TypeConverter {
     }
 
     private static Long toLong(Object object, Class<?> from) {
+
+        if (object == null) {
+            return 0L;
+        }
 
         if (from.equals(String.class)) {
             return Long.valueOf((String)object);
