@@ -3,7 +3,7 @@
   <groupId>com.github.lbovolini</groupId>
   <artifactId>object-mapper</artifactId>
   <packaging>jar</packaging>
-  <version>1.1.64-SNAPSHOT</version>
+  <version>1.1.69-SNAPSHOT</version>
   <description>
     Maps an object to another via getters and setters methods
   </description>
@@ -77,22 +77,11 @@
           </dependency>
         </dependencies>
       </plugin>
-      <!--<plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.7</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
-        </configuration>
-      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>3.2.1</version>
-        <!--<executions>
+        <executions>
           <execution>
             <id>attach-sources</id>
             <goals>
@@ -103,7 +92,7 @@
             <id>attach-javadoc</id>
             <goals />
           </execution>
-        </executions>-->
+        </executions>
       </plugin>
 
       <plugin>
@@ -171,6 +160,21 @@
       </activation>
       <properties>
       </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.7</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
       <distributionManagement>
         <repository>
           <id>ossrh</id>
@@ -199,7 +203,7 @@
         </repository>
       </distributionManagement>
     </profile>
-    <!--<profile>
+    <profile>
       <id>sign-artifacts</id>
       <activation>
         <property>
@@ -229,6 +233,6 @@
           </plugin>
         </plugins>
       </build>
-    </profile>-->
+    </profile>
   </profiles>
 </project>
