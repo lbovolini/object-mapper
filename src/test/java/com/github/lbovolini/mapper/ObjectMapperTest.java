@@ -2,9 +2,13 @@ package com.github.lbovolini.mapper;
 
 import com.github.lbovolini.dto.*;
 import com.github.lbovolini.model.*;
+import com.github.lbovolini.object.AnotherInvalidGetSet;
+import com.github.lbovolini.object.InvalidDTOGetSet;
+import com.github.lbovolini.object.InvalidGetSet;
 import com.github.lbovolini.object.ObjectBool;
 import com.github.lbovolini.primitive.PrimitiveBool;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.util.*;
 
@@ -61,6 +65,87 @@ class ObjectMapperTest {
     @Test
     void shouldBeNull() {
         assertNull(ObjectMapper.map(null, Integer.class));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenObjectIsNotNullAndClassIsNull() {
+
+        String message = "";
+        try {
+            ObjectMapper.map(new Object(), null);
+        } catch (IllegalArgumentException e) {
+            message = e.getMessage();
+        } finally {
+            assertEquals(message, "Class cannot be null");
+        }
+    }
+
+    @Test
+    void shouldThrowExceptionWhenClassDoesNotHaveAccessibleNonParametrizedConstructor() {
+
+        class PrimitiveInt {
+            int i;
+
+            public int getI() {
+                return i;
+            }
+
+            public void setI(int i) {
+                this.i = i;
+            }
+        }
+
+        class ObjectInt {
+            Integer i;
+
+            public Integer getI() {
+                return i;
+            }
+
+            public void setI(Integer i) {
+                this.i = i;
+            }
+        }
+
+        // Input
+        PrimitiveInt primitiveInt = new PrimitiveInt();
+
+        String message = "";
+        try {
+            // Should test ONLY this method
+            ObjectMapper.map(primitiveInt, ObjectInt.class);
+        } catch (RuntimeException e) {
+            message = e.getMessage();
+        } finally {
+            // Assertions
+            assertEquals("Error while creating instance of given class. Maybe it does not have accessible non parametrized constructor", message);
+        }
+    }
+
+    @Test
+    void shouldNotWorkWithUnnamedGetOrSet() {
+        // Input
+        InvalidGetSet invalidGetSet = new InvalidGetSet();
+        invalidGetSet.set(1);
+
+        // Should test ONLY this method
+        AnotherInvalidGetSet anotherInvalidGetSet = ObjectMapper.map(invalidGetSet, AnotherInvalidGetSet.class);
+
+        // Assertions
+        assertEquals(0, anotherInvalidGetSet.get());
+    }
+
+    @Test
+    void shouldWorkWithGetSetDtoMethodName() {
+        // Input
+        InvalidGetSet invalidGetSet = new InvalidGetSet();
+        invalidGetSet.setDto(1);
+
+        // Should test ONLY this method
+        InvalidDTOGetSet invalidDTOGetSet = ObjectMapper.map(invalidGetSet, InvalidDTOGetSet.class);
+
+        // Assertions
+        assertEquals(1, invalidDTOGetSet.getDto());
     }
 
     @Test
