@@ -6,22 +6,22 @@ Maps an object to another via getters and setters methods
 
 ## Features
 
-  - Maps DTO to Model/Entity object
-  - Maps Model/Entity to DTO object
-  - Maps nested objects
-  - Maps nested Lists, Sets and Maps
-  - Can map any object to any object if it follows the restrictions
-  - Caches objects getters and setters methods for improve performance
+- Maps DTO to Model/Entity object
+- Maps Model/Entity to DTO object
+- Maps nested objects
+- Maps nested Lists, Sets and Maps
+- Can map any object to any object if it follows the restrictions
+- Caches objects getters and setters methods for improve performance
 
 ## Restrictions
 
-  - Maps only corresponding origin object field if it has getter method and destination object have corresponding setter method
-  - Returned class should have accessible constructor without parameters
-  - Getter and setter methods name should have more than 3 characters
+- Maps only corresponding origin object field if it has getter method and destination object have corresponding setter method
+- Returned class should have accessible constructor without parameters
+- Getter and setter methods name should have more than 3 characters
 
 ## Requirements
 
-  - Java 1.7+
+- Java 1.7+
 
 ## Examples
 
