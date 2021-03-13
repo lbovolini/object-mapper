@@ -2,7 +2,6 @@
 
 ![CI](https://github.com/lbovolini/object-mapper/workflows/CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/lbovolini/object-mapper/badge.svg?branch=master)](https://coveralls.io/github/lbovolini/object-mapper?branch=master) [![Maven Central](https://img.shields.io/maven-central/v/com.github.lbovolini/object-mapper.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.lbovolini%22%20AND%20a:%22object-mapper%22) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
 Maps an object to another via getters and setters methods
 
 ## Features
@@ -16,7 +15,9 @@ Maps an object to another via getters and setters methods
 
 ## Restrictions
 
-Maps only corresponding origin object field if it have getter method and destination object have corresponding setter method
+- Maps only corresponding origin object field if it has getter method and destination object have corresponding setter method
+- Returned class should have accessible constructor without parameters
+- Getter and setter methods name should have more than 3 characters
 
 ## Requirements
 
