@@ -13,12 +13,10 @@ public class ObjectMapper {
 
     private static final Map<String, Map<String, Method>> cacheGetters;
     private static final Map<String, Map<String, Method>> cacheSetters;
-    private static final TypeConverter typeConverter;
 
     static {
         cacheGetters = new ConcurrentHashMap<>();
         cacheSetters = new ConcurrentHashMap<>();
-        typeConverter = new TypeConverter();
     }
 
     public static <T> T map(final Object object, final Class<?> aClass) {
@@ -95,7 +93,7 @@ public class ObjectMapper {
                     if (!parameterTypes[0].equals(getterMethod.getReturnType())) {
                         Class<?> from = getterMethod.getReturnType();
                         Class<?> to = parameterTypes[0];
-                        getterMethodResult = typeConverter.converter(getterMethodResult, from, to);                    }
+                        getterMethodResult = TypeConverter.converter(getterMethodResult, from, to);                    }
                 }
 
                 if (nested && getterMethodResult != null) {
