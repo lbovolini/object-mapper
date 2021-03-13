@@ -15,7 +15,9 @@ Maps an object to another via getters and setters methods
 
 ## Restrictions
 
-Maps only corresponding origin object field if it have getter method and destination object have corresponding setter method
+  - Maps only corresponding origin object field if it has getter method and destination object have corresponding setter method
+  - Returned class should have accessible constructor without parameters
+  - Getter and setter methods name should have more than 3 characters
 
 ## Requirements
 
