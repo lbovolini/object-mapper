@@ -7,10 +7,21 @@ public class StudentWithCourseWithListWithSelf {
     private String name;
     private String email;
     private String password;
-    //private LocalDate birthday;
     private int courseId;
 
     private CourseWithListWithStudentWithSelf courseWithListWithStudentWithSelf;
+
+    public StudentWithCourseWithListWithSelf() {
+    }
+
+    public StudentWithCourseWithListWithSelf(int id, String name, String email, String password, int courseId, CourseWithListWithStudentWithSelf courseWithListWithStudentWithSelf) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.courseId = courseId;
+        this.courseWithListWithStudentWithSelf = courseWithListWithStudentWithSelf;
+    }
 
     public int getId() {
         return id;

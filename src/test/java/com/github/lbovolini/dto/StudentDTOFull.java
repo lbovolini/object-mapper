@@ -6,6 +6,15 @@ public class StudentDTOFull extends StudentDTO {
 
     private CourseDTO courseDTO;
 
+    public StudentDTOFull() {
+        super();
+    }
+
+    public StudentDTOFull(StudentDTO studentDTO, CourseDTO courseDTO) {
+        super(studentDTO.getId(), studentDTO.getName(), studentDTO.getEmail(), studentDTO.getPassword(), studentDTO.getCourseId());
+        this.courseDTO = courseDTO;
+    }
+
     public CourseDTO getCourseDTO() {
         return courseDTO;
     }

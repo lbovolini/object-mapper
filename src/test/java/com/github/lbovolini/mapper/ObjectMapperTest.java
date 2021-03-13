@@ -6,148 +6,61 @@ import com.github.lbovolini.object.ObjectBool;
 import com.github.lbovolini.primitive.PrimitiveBool;
 import org.junit.jupiter.api.Test;
 
-//import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ObjectMapperTest {
 
-    private static final int id = 1;
-    private static final String name = "Lucas Bovolini";
-    private static final String email = "lucasbovolini@hotmail.com";
-    private static final String password = "password123";
-    //private static final LocalDate birthday = LocalDate.of(1994, 7, 18);
-    private static final int courseId = 1;
-    private static final String courseName = "Sistemas de Informação";
+    private final int firstStudentId = 1;
+    private final String firstStudentName = "Lucas Bovolini";
+    private final String firstStudentEmail = "lbovolini94@gmail.com";
+    private final String firstStudentPassword = "password123";
+    private final int firstStudentCourseId = 1;
+    private final String firstStudentCourseName = "Sistemas de Informação";
 
-    private static final int randId = new Random().nextInt();
-    private static final String randName = name + new Random().nextInt();
-    private static final String randEmail = email + new Random().nextInt();
-    private static final String randPassword = password + new Random().nextInt();
-    //private static final LocalDate randBirthday = birthday.minusDays(new Random().nextInt());
-    private static final int randCourseId = new Random().nextInt();
+    private final int secondStudentId = 2;
+    private final String secondStudentName = "Ana da Silva";
+    private final String secondStudentEmail = "anasilva@hotmail.com.br";
+    private final String secondStudentPassword = "anasilva1999";
+    private final int secondStudentCourseId = 2;
+    private final String secondStudentCourseName = "Matemática";
 
-    private static final Student student = new Student();
-    private static final Student student1 = new Student();
-    private static final Student studentWithoutCourse = new Student();
-    private static final Student studentWithoutCourse1 = new Student();
-    private static final StudentDTO studentDTO = new StudentDTO();
-    private static final StudentDTO studentDTO1 = new StudentDTO();
-    private static final Course course = new Course();
-    private static final CourseDTO courseDTO = new CourseDTO();
-    private static final StudentDTOFull studentDTOFull = new StudentDTOFull();
-    private static final StudentDTOFull studentDTOFull1 = new StudentDTOFull();
-    private static final List<Student> studentList = new ArrayList<>();
-    private static final List<StudentDTO> studentDTOList = new ArrayList<>();
-    private static final List<StudentDTOFull> studentDTOFullList = new ArrayList<>();
-    private static final List<StudentDTOFull> studentDTOFullList1 = new ArrayList<>();
-    private static final CourseWithList courseWithList = new CourseWithList();
-    private static final CourseWithList courseWithList1 = new CourseWithList();
-    private static final CourseWitListDTO courseWitListDTO = new CourseWitListDTO();
-    private static final CourseWitListDTO courseWitListDTO1 = new CourseWitListDTO();
+    private final Course firstStudentCourse = new Course(firstStudentCourseId, firstStudentCourseName);
+    private final Student firstStudent = new Student(firstStudentId, firstStudentName, firstStudentEmail, firstStudentPassword, firstStudentCourseId, firstStudentCourse);
 
-    static {
-        student.setId(id);
-        student.setName(name);
-        student.setEmail(email);
-        student.setPassword(password);
-        //student.setBirthday(birthday);
-        student.setCourseId(courseId);
-        student.setCourse(course);
+    private final Course secondStudentCourse = new Course(secondStudentCourseId, secondStudentCourseName);
+    private final Student secondStudent = new Student(secondStudentId, secondStudentName, secondStudentEmail, secondStudentPassword, secondStudentCourseId, secondStudentCourse);
 
-        student1.setId(randId);
-        student1.setName(randName);
-        student1.setEmail(randEmail);
-        student1.setPassword(randPassword);
-        //student1.setBirthday(randBirthday);
-        student1.setCourseId(randCourseId);
-        student1.setCourse(course);
+    private final Student firstStudentWithoutCourse = new Student(firstStudentId, firstStudentName, firstStudentEmail, firstStudentPassword, firstStudentCourseId);
+    private final Student secondStudentWithoutCourse = new Student(secondStudentId, secondStudentName, secondStudentEmail, secondStudentPassword, secondStudentCourseId);
 
-        studentWithoutCourse.setId(id);
-        studentWithoutCourse.setName(name);
-        studentWithoutCourse.setEmail(email);
-        studentWithoutCourse.setPassword(password);
-        //studentWithoutCourse.setBirthday(birthday);
-        studentWithoutCourse.setCourseId(courseId);
+    private final StudentDTO firstStudentDTO = new StudentDTO(firstStudentId, firstStudentName, firstStudentEmail, firstStudentPassword, firstStudentCourseId);
+    private final StudentDTO secondStudentDTO = new StudentDTO(secondStudentId, secondStudentName, secondStudentEmail, secondStudentPassword, secondStudentCourseId);
 
-        studentWithoutCourse1.setId(randId);
-        studentWithoutCourse1.setName(randName);
-        studentWithoutCourse1.setEmail(randEmail);
-        studentWithoutCourse1.setPassword(randPassword);
-        //studentWithoutCourse1.setBirthday(randBirthday);
-        studentWithoutCourse1.setCourseId(randCourseId);
+    private final CourseDTO firstStudentCourseDTO = new CourseDTO(firstStudentCourseId, firstStudentCourseName);
+    private final CourseDTO secondStudentCourseDTO = new CourseDTO(secondStudentCourseId, secondStudentCourseName);
 
-        studentDTO.setId(id);
-        studentDTO.setName(name);
-        studentDTO.setEmail(email);
-        studentDTO.setPassword(password);
-        //studentDTO.setBirthday(birthday);
-        studentDTO.setCourseId(courseId);
+    private final StudentDTOFull firstStudentDTOFull = new StudentDTOFull(firstStudentDTO, firstStudentCourseDTO);
+    private final StudentDTOFull secondStudentDTOFull = new StudentDTOFull(secondStudentDTO, secondStudentCourseDTO);
 
-        studentDTO1.setId(randId);
-        studentDTO1.setName(randName);
-        studentDTO1.setEmail(randEmail);
-        studentDTO1.setPassword(randPassword);
-        //studentDTO1.setBirthday(randBirthday);
-        studentDTO1.setCourseId(randCourseId);
-
-        course.setId(courseId);
-        course.setName(courseName);
-
-        courseDTO.setId(courseId);
-        courseDTO.setName(courseName);
-
-        studentDTOFull.setId(id);
-        studentDTOFull.setName(name);
-        studentDTOFull.setEmail(email);
-        studentDTOFull.setPassword(password);
-        //studentDTOFull.setBirthday(birthday);
-        studentDTOFull.setCourseId(courseId);
-        studentDTOFull.setCourseDTO(courseDTO);
-
-        studentDTOFull1.setId(randId);
-        studentDTOFull1.setName(randName);
-        studentDTOFull1.setEmail(randEmail);
-        studentDTOFull1.setPassword(randPassword);
-        //studentDTOFull1.setBirthday(randBirthday);
-        studentDTOFull1.setCourseId(randCourseId);
-        studentDTOFull1.setCourseDTO(courseDTO);
-
-        studentList.add(student);
-        studentList.add(student1);
-
-        studentDTOList.add(studentDTO);
-        studentDTOList.add(studentDTO1);
-
-        studentDTOFullList.add(studentDTOFull);
-        studentDTOFullList.add(studentDTOFull1);
-
-        studentDTOFullList1.add(studentDTOFull);
-        studentDTOFullList1.add(studentDTOFull1);
-
-        courseWithList.setId(courseId);
-        courseWithList.setName(courseName);
-        courseWithList.setStudentList(studentList);
-
-        courseWithList1.setId(randId);
-        courseWithList1.setName(randName);
-        courseWithList1.setStudentList(studentList);
-
-        courseWitListDTO.setId(courseId);
-        courseWitListDTO.setName(courseName);
-        courseWitListDTO.setStudentDTOList(studentDTOFullList);
-
-        courseWitListDTO1.setId(randId);
-        courseWitListDTO1.setName(randName);
-        courseWitListDTO1.setStudentDTOList(studentDTOFullList);
+    private final StudentStringDTO firstStudentStringDTO = new StudentStringDTO(String.valueOf(firstStudentId), firstStudentName, firstStudentEmail, firstStudentPassword, String.valueOf(firstStudentCourseId));
 
 
-    }
+    private final List<Student> studentList = Arrays.asList(firstStudent, secondStudent);
+
+    private final List<StudentDTOFull> studentDTOFullList = Arrays.asList(firstStudentDTOFull, secondStudentDTOFull);
+
+    private final CourseWithList firstCourseWithList = new CourseWithList(firstStudentCourse, studentList);
+    private final CourseWithList secondCourseWithList = new CourseWithList(secondStudentCourse, studentList);
+
+    private final CourseWitListDTO firstCourseWitListDTO = new CourseWitListDTO(firstStudentCourseDTO, studentDTOFullList);
+    private final CourseWitListDTO secondCourseWithListDTO = new CourseWitListDTO(secondStudentCourseDTO, studentDTOFullList);
+
 
     @Test
     void shouldBeNull() {
-        assertNull(ObjectMapper.<Integer>map(null, Integer.class));
+        assertNull(ObjectMapper.map(null, Integer.class));
     }
 
     @Test
@@ -200,328 +113,288 @@ class ObjectMapperTest {
 
     @Test
     void shouldConvertStudentToStudentEmptyDTO() {
-        StudentEmptyDTO studentEmptyDTO1 = ObjectMapper.map(student, StudentEmptyDTO.class);
+        // Should test ONLY this method
+        StudentEmptyDTO studentEmptyDTO = ObjectMapper.map(firstStudent, StudentEmptyDTO.class);
+
+        // Assertions
+        assertNotNull(studentEmptyDTO);
     }
 
     @Test
     void shouldConvertStudentEmptyDTOToStudent() {
+        // Input
         StudentEmptyDTO studentEmptyDTO = new StudentEmptyDTO();
+
+        // Expected output
+        Student expectedOutput = new Student();
+
+        // Should test ONLY this method
         Student student = ObjectMapper.map(studentEmptyDTO, Student.class);
+
+        // Assertions
+        assertEquals(expectedOutput, student);
     }
 
     @Test
     void shouldConvertModelToDTO() {
+        // Should test ONLY this method
+        StudentDTO studentDTO = ObjectMapper.map(firstStudent, StudentDTO.class);
 
-        StudentDTO studentDTO = ObjectMapper.map(student, StudentDTO.class);
-
-        assertEquals(id, studentDTO.getId());
-        assertEquals(name, studentDTO.getName());
-        assertEquals(email, studentDTO.getEmail());
-        assertEquals(password, studentDTO.getPassword());
-        //assertEquals(birthday, studentDTO.getBirthday());
-        assertEquals(courseId, studentDTO.getCourseId());
+        // Assertions
+        assertEquals(studentDTO, studentDTO);
     }
 
     @Test
     void shouldConvertDTOToModel() {
+        // Should test ONLY this method
+        Student student = ObjectMapper.map(firstStudentDTO, Student.class);
 
-        Student student = ObjectMapper.map(studentDTO, Student.class);
-
-        assertEquals(id, student.getId());
-        assertEquals(name, student.getName());
-        assertEquals(email, student.getEmail());
-        assertEquals(password, student.getPassword());
-        //assertEquals(birthday, student.getBirthday());
-        assertEquals(courseId, student.getCourseId());
+        // Assertions
+        assertEquals(firstStudentWithoutCourse, student);
     }
 
     @Test
     void shouldConvertStudentDTOFullToStudent() {
+        // Should test ONLY this method
+        Student student = ObjectMapper.map(firstStudentDTOFull, Student.class);
 
-        Student student = ObjectMapper.map(studentDTOFull, Student.class);
-
-        assertEquals(id, student.getId());
-        assertEquals(name, student.getName());
-        assertEquals(email, student.getEmail());
-        assertEquals(password, student.getPassword());
-        //assertEquals(birthday, student.getBirthday());
-        assertEquals(courseId, student.getCourseId());
-        assertEquals(course, student.getCourse());
+        // Assertions
+        assertEquals(firstStudent, student);
     }
 
     @Test
     void shouldConvertStudentToStudentDTOFull() {
+        // Should test ONLY this method
+        StudentDTOFull studentDTOFull = ObjectMapper.map(firstStudent, StudentDTOFull.class);
 
-        StudentDTOFull studentDTOFull = ObjectMapper.map(student, StudentDTOFull.class);
-
-        assertEquals(id, studentDTOFull.getId());
-        assertEquals(name, studentDTOFull.getName());
-        assertEquals(email, studentDTOFull.getEmail());
-        assertEquals(password, studentDTOFull.getPassword());
-        //assertEquals(birthday, studentDTOFull.getBirthday());
-        assertEquals(courseId, studentDTOFull.getCourseId());
-        assertEquals(courseDTO, studentDTOFull.getCourseDTO());
-
-        assertEquals(ObjectMapperTest.studentDTOFull, studentDTOFull);
+        // Assertions
+        assertEquals(firstStudentDTOFull, studentDTOFull);
     }
 
     @Test
     void shouldConvertStudentToStudentStringDTO() {
+        // Should test ONLY this method
+        StudentStringDTO studentStringDTO = ObjectMapper.map(firstStudent, StudentStringDTO.class);
 
-        StudentStringDTO studentStringDTO = new StudentStringDTO();
-        studentStringDTO.setId(String.valueOf(id));
-        studentStringDTO.setName(name);
-        studentStringDTO.setEmail(email);
-        studentStringDTO.setPassword(password);
-        studentStringDTO.setCourseId(String.valueOf(courseId));
-
-        StudentStringDTO studentStringDTO1 = ObjectMapper.map(student, StudentStringDTO.class);
-
-        assertEquals(studentStringDTO, studentStringDTO1);
+        // Assertions
+        assertEquals(firstStudentStringDTO, studentStringDTO);
     }
 
     @Test
     void shouldConvertStudentStringDTOToStudent() {
+        // Should test ONLY this method
+        Student student = ObjectMapper.map(firstStudentStringDTO, Student.class);
 
-        Student student = new Student();
-        student.setId(id);
-        student.setName(name);
-        student.setEmail(email);
-        student.setPassword(password);
-        student.setCourseId(courseId);
-
-        StudentStringDTO studentStringDTO = new StudentStringDTO();
-        studentStringDTO.setId(String.valueOf(id));
-        studentStringDTO.setName(name);
-        studentStringDTO.setEmail(email);
-        studentStringDTO.setPassword(password);
-        studentStringDTO.setCourseId(String.valueOf(courseId));
-
-        Student student1 = ObjectMapper.map(studentStringDTO, Student.class);
-
-        assertEquals(student, student1);
+        // Assertions
+        assertEquals(firstStudentWithoutCourse, student);
     }
 
     @Test
     void shouldConvertCourseWithListToCourseWithListDTO() {
+        // Should test ONLY this method
+        CourseWitListDTO courseWitListDTO = ObjectMapper.map(firstCourseWithList, CourseWitListDTO.class);
 
-        CourseWitListDTO courseWitListDTO = ObjectMapper.map(courseWithList, CourseWitListDTO.class);
-
-        assertEquals(courseId, courseWitListDTO.getId());
-        assertEquals(courseName, courseWitListDTO.getName());
-
-        List<StudentDTOFull> studentDTOList1 = courseWitListDTO.getStudentDTOList();
-
-        assertEquals(studentDTOFullList, studentDTOList1);
+        // Assertions
+        assertEquals(firstCourseWitListDTO, courseWitListDTO);
     }
 
     @Test
     void shouldConvertCourseWithSetToCourseWithSetDTO() {
-
+        // Inputs
         Set<Student> studentSet = new HashSet<>();
-        studentSet.add(student);
-        studentSet.add(student1);
-
-        Set<StudentDTO> studentDTOSet = new HashSet<>();
-        studentDTOSet.add(studentDTO);
-        studentDTOSet.add(studentDTO1);
+        studentSet.add(firstStudent);
+        studentSet.add(secondStudent);
 
         CourseWithSet courseWithSet = new CourseWithSet();
-        courseWithSet.setId(courseId);
-        courseWithSet.setName(courseName);
+        courseWithSet.setId(firstStudentCourseId);
+        courseWithSet.setName(firstStudentCourseName);
         courseWithSet.setStudentSet(studentSet);
 
-        CourseWithSetDTO courseWithSetDTO = new CourseWithSetDTO();
-        courseWithSetDTO.setId(courseId);
-        courseWithSetDTO.setName(courseName);
-        courseWithSetDTO.setStudentDTOSet(studentDTOSet);
+        // Expected output
+        Set<StudentDTO> studentDTOSet = new HashSet<>();
+        studentDTOSet.add(firstStudentDTO);
+        studentDTOSet.add(secondStudentDTO);
 
-        CourseWithSetDTO courseWithSetDTO1 = ObjectMapper.map(courseWithSet, CourseWithSetDTO.class);
+        CourseWithSetDTO expectedOutput = new CourseWithSetDTO();
+        expectedOutput.setId(firstStudentCourseId);
+        expectedOutput.setName(firstStudentCourseName);
+        expectedOutput.setStudentDTOSet(studentDTOSet);
 
-        assertEquals(studentDTOSet, courseWithSetDTO1.getStudentDTOSet());
+        // Should test ONLY this method
+        CourseWithSetDTO courseWithSetDTO = ObjectMapper.map(courseWithSet, CourseWithSetDTO.class);
+
+        // Assertions
+        assertEquals(expectedOutput, courseWithSetDTO);
     }
 
     @Test
     void shouldConvertCourseWithSetDTOToCourseWithSet() {
-
-        Set<Student> studentSet = new HashSet<>();
-        studentSet.add(studentWithoutCourse);
-        studentSet.add(studentWithoutCourse1);
-
+        // Input
         Set<StudentDTO> studentDTOSet = new HashSet<>();
-        studentDTOSet.add(studentDTO);
-        studentDTOSet.add(studentDTO1);
-
-        CourseWithSet courseWithSet = new CourseWithSet();
-        courseWithSet.setId(courseId);
-        courseWithSet.setName(courseName);
-        courseWithSet.setStudentSet(studentSet);
+        studentDTOSet.add(firstStudentDTO);
+        studentDTOSet.add(secondStudentDTO);
 
         CourseWithSetDTO courseWithSetDTO = new CourseWithSetDTO();
-        courseWithSetDTO.setId(courseId);
-        courseWithSetDTO.setName(courseName);
+        courseWithSetDTO.setId(firstStudentCourseId);
+        courseWithSetDTO.setName(firstStudentCourseName);
         courseWithSetDTO.setStudentDTOSet(studentDTOSet);
 
-        CourseWithSet courseWithSet1 = ObjectMapper.map(courseWithSetDTO, CourseWithSet.class);
+        // Expected output
+        Set<Student> studentSet = new HashSet<>();
+        studentSet.add(firstStudentWithoutCourse);
+        studentSet.add(secondStudentWithoutCourse);
 
-        assertEquals(studentSet, courseWithSet1.getStudentSet());
+        CourseWithSet expectedOutput = new CourseWithSet();
+        expectedOutput.setId(firstStudentCourseId);
+        expectedOutput.setName(firstStudentCourseName);
+        expectedOutput.setStudentSet(studentSet);
+
+        // Should test ONLY this method
+        CourseWithSet courseWithSet = ObjectMapper.map(courseWithSetDTO, CourseWithSet.class);
+
+        // Assertions
+        assertEquals(expectedOutput, courseWithSet);
     }
 
     @Test
     void shouldConvertCourseWithMapDTOToCourseWithMap() {
-
-        Map<String, Student> studentMap = new HashMap<>();
-        studentMap.put(studentWithoutCourse.getName(), studentWithoutCourse);
-        studentMap.put(studentWithoutCourse1.getName(), studentWithoutCourse1);
-
+        // Input
         Map<String, StudentDTO> studentDTOMap = new HashMap<>();
-        studentDTOMap.put(studentDTO.getName(), studentDTO);
-        studentDTOMap.put(studentDTO1.getName(), studentDTO1);
-
-        CourseWithMap courseWithMap = new CourseWithMap();
-        courseWithMap.setId(courseId);
-        courseWithMap.setName(courseName);
-        courseWithMap.setStudentMap(studentMap);
+        studentDTOMap.put(firstStudentDTO.getName(), firstStudentDTO);
+        studentDTOMap.put(secondStudentDTO.getName(), secondStudentDTO);
 
         CourseWithMapDTO courseWithMapDTO = new CourseWithMapDTO();
-        courseWithMapDTO.setId(courseId);
-        courseWithMapDTO.setName(courseName);
+        courseWithMapDTO.setId(firstStudentCourseId);
+        courseWithMapDTO.setName(firstStudentCourseName);
         courseWithMapDTO.setStudentDTOMap(studentDTOMap);
 
-        CourseWithMap courseWithMap1 = ObjectMapper.map(courseWithMapDTO, CourseWithMap.class);
+        // Expected output
+        Map<String, Student> studentMap = new HashMap<>();
+        studentMap.put(firstStudentWithoutCourse.getName(), firstStudentWithoutCourse);
+        studentMap.put(secondStudentWithoutCourse.getName(), secondStudentWithoutCourse);
 
-        assertEquals(studentMap, courseWithMap1.getStudentMap());
+        CourseWithMap expectedOutput = new CourseWithMap();
+        expectedOutput.setId(firstStudentCourseId);
+        expectedOutput.setName(firstStudentCourseName);
+        expectedOutput.setStudentMap(studentMap);
+
+        // Should test ONLY this method
+        CourseWithMap courseWithMap = ObjectMapper.map(courseWithMapDTO, CourseWithMap.class);
+
+        // Assertions
+        assertEquals(expectedOutput, courseWithMap);
     }
 
     @Test
     void shouldConvertCourseWithMapDTOToCourseWithMapEmptyMap() {
-
-        Map<String, Student> studentMap = new HashMap<>();
-
+        // Input
         Map<String, StudentDTO> studentDTOMap = new HashMap<>();
 
-        CourseWithMap courseWithMap = new CourseWithMap();
-        courseWithMap.setId(courseId);
-        courseWithMap.setName(courseName);
-        courseWithMap.setStudentMap(studentMap);
-
         CourseWithMapDTO courseWithMapDTO = new CourseWithMapDTO();
-        courseWithMapDTO.setId(courseId);
-        courseWithMapDTO.setName(courseName);
+        courseWithMapDTO.setId(firstStudentCourseId);
+        courseWithMapDTO.setName(firstStudentCourseName);
         courseWithMapDTO.setStudentDTOMap(studentDTOMap);
 
-        CourseWithMap courseWithMap1 = ObjectMapper.map(courseWithMapDTO, CourseWithMap.class);
+        // Expected output
+        Map<String, Student> studentMap = new HashMap<>();
 
-        assertEquals(studentMap, courseWithMap1.getStudentMap());
+        CourseWithMap expectedOutput = new CourseWithMap();
+        expectedOutput.setId(firstStudentCourseId);
+        expectedOutput.setName(firstStudentCourseName);
+        expectedOutput.setStudentMap(studentMap);
+
+        // Should test ONLY this method
+        CourseWithMap courseWithMap = ObjectMapper.map(courseWithMapDTO, CourseWithMap.class);
+
+        // Assertions
+        assertEquals(expectedOutput, courseWithMap);
     }
 
     @Test
     void shouldConvertListCourseWithListToListCourseWitListDTO() {
-
+        // Input
         List<CourseWithList> courseWithListArrayList = new ArrayList<>();
-        courseWithListArrayList.add(courseWithList);
-        courseWithListArrayList.add(courseWithList1);
+        courseWithListArrayList.add(firstCourseWithList);
+        courseWithListArrayList.add(secondCourseWithList);
 
-        List<CourseWitListDTO> courseWitListDTOList = new ArrayList<>();
-        courseWitListDTOList.add(courseWitListDTO);
-        courseWitListDTOList.add(courseWitListDTO1);
+        // Expected output
+        List<CourseWitListDTO> expectedOutput = new ArrayList<>();
+        expectedOutput.add(firstCourseWitListDTO);
+        expectedOutput.add(secondCourseWithListDTO);
 
-        List<CourseWitListDTO> courseWitListDTOList1 = ObjectMapper.map(courseWithListArrayList, CourseWitListDTO.class);
+        // Should test ONLY this method
+        List<CourseWitListDTO> courseWitListDTOList = ObjectMapper.map(courseWithListArrayList, CourseWitListDTO.class);
 
-        assertEquals(courseWitListDTOList, courseWitListDTOList1);
+        // Assertions
+        assertEquals(expectedOutput, courseWitListDTOList);
     }
 
     @Test
     void shouldConvertListCourseWitListDTOToListCourseWitList() {
-
-        List<CourseWithList> courseWithListArrayList = new ArrayList<>();
-        courseWithListArrayList.add(courseWithList);
-        courseWithListArrayList.add(courseWithList1);
-
+        // Input
         List<CourseWitListDTO> courseWitListDTOList = new ArrayList<>();
-        courseWitListDTOList.add(courseWitListDTO);
-        courseWitListDTOList.add(courseWitListDTO1);
+        courseWitListDTOList.add(firstCourseWitListDTO);
+        courseWitListDTOList.add(secondCourseWithListDTO);
 
+        // Expected output
+        List<CourseWithList> expectedOutput = new ArrayList<>();
+        expectedOutput.add(firstCourseWithList);
+        expectedOutput.add(secondCourseWithList);
+
+        // Should test ONLY this method
         List<CourseWithList> courseWithListList = ObjectMapper.map(courseWitListDTOList, CourseWithList.class);
 
-        assertEquals(courseWithListArrayList, courseWithListList);
+        // Assertions
+        assertEquals(expectedOutput, courseWithListList);
     }
 
+    /**
+     * Infinite recursion test case
+     */
     @Test
     void shouldConvertListCourseWithListWithStudentWithSelfToListCourseWithListWithStudentWithSelfDTO() {
-
+        // Input
         CourseWithListWithStudentWithSelf courseWithListWithStudentWithSelf = new CourseWithListWithStudentWithSelf();
         CourseWithListWithStudentWithSelf courseWithListWithStudentWithSelf1 = new CourseWithListWithStudentWithSelf();
-        StudentWithCourseWithListWithSelf studentWithCourseWithListWithSelf = new StudentWithCourseWithListWithSelf();
-        StudentWithCourseWithListWithSelf studentWithCourseWithListWithSelf1 = new StudentWithCourseWithListWithSelf();
+        StudentWithCourseWithListWithSelf studentWithCourseWithListWithSelf = new StudentWithCourseWithListWithSelf(firstStudentId, firstStudentName, firstStudentEmail, firstStudentPassword, firstStudentCourseId, courseWithListWithStudentWithSelf);
+        StudentWithCourseWithListWithSelf studentWithCourseWithListWithSelf1 = new StudentWithCourseWithListWithSelf(secondStudentId, secondStudentName, secondStudentEmail, secondStudentPassword, secondStudentCourseId, courseWithListWithStudentWithSelf1);
 
         List<StudentWithCourseWithListWithSelf> studentWithCourseWithListWithSelfList = new ArrayList<>();
         studentWithCourseWithListWithSelfList.add(studentWithCourseWithListWithSelf);
         studentWithCourseWithListWithSelfList.add(studentWithCourseWithListWithSelf1);
 
-        studentWithCourseWithListWithSelf.setId(id);
-        studentWithCourseWithListWithSelf.setName(name);
-        studentWithCourseWithListWithSelf.setEmail(email);
-        studentWithCourseWithListWithSelf.setPassword(password);
-        studentWithCourseWithListWithSelf.setCourseId(courseId);
-        studentWithCourseWithListWithSelf.setCourseWithListWithStudentWithSelf(courseWithListWithStudentWithSelf);
 
-        studentWithCourseWithListWithSelf1.setId(randId);
-        studentWithCourseWithListWithSelf1.setName(randName);
-        studentWithCourseWithListWithSelf1.setEmail(randEmail);
-        studentWithCourseWithListWithSelf1.setPassword(randPassword);
-        studentWithCourseWithListWithSelf1.setCourseId(randCourseId);
-        studentWithCourseWithListWithSelf1.setCourseWithListWithStudentWithSelf(courseWithListWithStudentWithSelf1);
-
-        courseWithListWithStudentWithSelf.setId(courseId);
-        courseWithListWithStudentWithSelf.setName(courseName);
+        courseWithListWithStudentWithSelf.setId(firstStudentCourseId);
+        courseWithListWithStudentWithSelf.setName(firstStudentCourseName);
         courseWithListWithStudentWithSelf.setStudentWithCourseWithListWithSelfList(studentWithCourseWithListWithSelfList);
 
-        courseWithListWithStudentWithSelf1.setId(randId);
-        courseWithListWithStudentWithSelf1.setName(randName);
+        courseWithListWithStudentWithSelf1.setId(secondStudentCourseId);
+        courseWithListWithStudentWithSelf1.setName(secondStudentCourseName);
         courseWithListWithStudentWithSelf1.setStudentWithCourseWithListWithSelfList(studentWithCourseWithListWithSelfList);
 
         List<CourseWithListWithStudentWithSelf> courseWithListWithStudentWithSelfList = new ArrayList<>();
         courseWithListWithStudentWithSelfList.add(courseWithListWithStudentWithSelf);
         courseWithListWithStudentWithSelfList.add(courseWithListWithStudentWithSelf1);
 
-        CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO = new CourseWithListWithStudentWithSelfDTO();
-        CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO1 = new CourseWithListWithStudentWithSelfDTO();
-        StudentWithCourseWithListWithSelfDTO studentWithCourseWithListWithSelfDTO = new StudentWithCourseWithListWithSelfDTO();
-        StudentWithCourseWithListWithSelfDTO studentWithCourseWithListWithSelfDTO1 = new StudentWithCourseWithListWithSelfDTO();
-
         List<StudentWithCourseWithListWithSelfDTO> studentWithCourseWithListWithSelfDTOList = new ArrayList<>();
+
+        CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO = new CourseWithListWithStudentWithSelfDTO(firstStudentCourseDTO, studentWithCourseWithListWithSelfDTOList);
+        CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO1 = new CourseWithListWithStudentWithSelfDTO(secondStudentCourseDTO, studentWithCourseWithListWithSelfDTOList);
+        StudentWithCourseWithListWithSelfDTO studentWithCourseWithListWithSelfDTO = new StudentWithCourseWithListWithSelfDTO(firstStudentDTO, courseWithListWithStudentWithSelfDTO);
+        StudentWithCourseWithListWithSelfDTO studentWithCourseWithListWithSelfDTO1 = new StudentWithCourseWithListWithSelfDTO(secondStudentDTO, courseWithListWithStudentWithSelfDTO1);
+
         studentWithCourseWithListWithSelfDTOList.add(studentWithCourseWithListWithSelfDTO);
         studentWithCourseWithListWithSelfDTOList.add(studentWithCourseWithListWithSelfDTO1);
 
-        studentWithCourseWithListWithSelfDTO.setId(id);
-        studentWithCourseWithListWithSelfDTO.setName(name);
-        studentWithCourseWithListWithSelfDTO.setEmail(email);
-        studentWithCourseWithListWithSelfDTO.setPassword(password);
-        studentWithCourseWithListWithSelfDTO.setCourseId(courseId);
-        studentWithCourseWithListWithSelfDTO.setCourseWithListWithStudentWithSelfDTO(courseWithListWithStudentWithSelfDTO);
+        // Expected output
+        List<CourseWithListWithStudentWithSelfDTO> expectedOutput = new ArrayList<>();
+        expectedOutput.add(courseWithListWithStudentWithSelfDTO);
+        expectedOutput.add(courseWithListWithStudentWithSelfDTO1);
 
-        studentWithCourseWithListWithSelfDTO1.setId(randId);
-        studentWithCourseWithListWithSelfDTO1.setName(randName);
-        studentWithCourseWithListWithSelfDTO1.setEmail(randEmail);
-        studentWithCourseWithListWithSelfDTO1.setPassword(randPassword);
-        studentWithCourseWithListWithSelfDTO1.setCourseId(randCourseId);
-        studentWithCourseWithListWithSelfDTO1.setCourseWithListWithStudentWithSelfDTO(courseWithListWithStudentWithSelfDTO1);
-
-        courseWithListWithStudentWithSelfDTO.setId(courseId);
-        courseWithListWithStudentWithSelfDTO.setName(courseName);
-        courseWithListWithStudentWithSelfDTO.setStudentWithCourseWithListWithSelfDTOList(studentWithCourseWithListWithSelfDTOList);
-
-        courseWithListWithStudentWithSelfDTO1.setId(randId);
-        courseWithListWithStudentWithSelfDTO1.setName(randName);
-        courseWithListWithStudentWithSelfDTO1.setStudentWithCourseWithListWithSelfDTOList(studentWithCourseWithListWithSelfDTOList);
-
-        List<CourseWithListWithStudentWithSelfDTO> courseWithListWithStudentWithSelfDTOList = new ArrayList<>();
-        courseWithListWithStudentWithSelfDTOList.add(courseWithListWithStudentWithSelfDTO);
-        courseWithListWithStudentWithSelfDTOList.add(courseWithListWithStudentWithSelfDTO1);
-
+        // Should test ONLY this method
         List<CourseWithListWithStudentWithSelfDTO> courseWithListWithStudentWithSelfDTOList1 = ObjectMapper.map(courseWithListWithStudentWithSelfList, CourseWithListWithStudentWithSelfDTO.class);
 
+        // Assertions
         assertNull(courseWithListWithStudentWithSelfDTOList1.get(0).getStudentWithCourseWithListWithSelfDTOList().get(0).getCourseWithListWithStudentWithSelfDTO());
         assertNull(courseWithListWithStudentWithSelfDTOList1.get(0).getStudentWithCourseWithListWithSelfDTOList().get(1).getCourseWithListWithStudentWithSelfDTO());
         assertNull(courseWithListWithStudentWithSelfDTOList1.get(1).getStudentWithCourseWithListWithSelfDTOList().get(0).getCourseWithListWithStudentWithSelfDTO());
@@ -529,7 +402,7 @@ class ObjectMapperTest {
 
         assertEquals(courseWithListWithStudentWithSelfDTOList1.get(0), courseWithListWithStudentWithSelfDTO);
         assertEquals(courseWithListWithStudentWithSelfDTOList1.get(1), courseWithListWithStudentWithSelfDTO1);
-        assertEquals(courseWithListWithStudentWithSelfDTOList, courseWithListWithStudentWithSelfDTOList1);
+        assertEquals(expectedOutput, courseWithListWithStudentWithSelfDTOList1);
     }
 
     @Test
@@ -538,22 +411,15 @@ class ObjectMapperTest {
         long start = System.nanoTime();
         int repeat = 1_000_000;
 
-       // for (int i = 0; i < repeat; i++) {
+        for (int i = 0; i < repeat; i++) {
 
             int id = new Random().nextInt();
-            String name = ObjectMapperTest.name + new Random().nextInt();
-            String email = ObjectMapperTest.email + new Random().nextInt();
-            String password = ObjectMapperTest.password + new Random().nextInt();
-            //LocalDate birthday = ObjectMapperTest.birthday.minusDays(new Random().nextInt());
+            String name = firstStudentName + new Random().nextInt();
+            String email = firstStudentEmail + new Random().nextInt();
+            String password = firstStudentPassword + new Random().nextInt();
             int courseId = new Random().nextInt();
 
-            Student student = new Student();
-            student.setId(id);
-            student.setName(name);
-            student.setEmail(email);
-            student.setPassword(password);
-            //student.setBirthday(birthday);
-            student.setCourseId(courseId);
+            Student student = new Student(id, name, email, password, courseId);
 
             StudentDTO studentDTO = ObjectMapper.map(student, StudentDTO.class);
 
@@ -561,9 +427,8 @@ class ObjectMapperTest {
             assertEquals(name, studentDTO.getName());
             assertEquals(email, studentDTO.getEmail());
             assertEquals(password, studentDTO.getPassword());
-            //assertEquals(birthday, studentDTO.getBirthday());
             assertEquals(courseId, studentDTO.getCourseId());
-       // }
+        }
 
         long end = System.nanoTime();
 
@@ -576,13 +441,12 @@ class ObjectMapperTest {
         long start = System.nanoTime();
         int repeat = 1_000_000;
 
-       // for (int i = 0; i < repeat; i++) {
+        for (int i = 0; i < repeat; i++) {
 
             int id = new Random().nextInt();
-            String name = ObjectMapperTest.name + new Random().nextInt();
-            String email = ObjectMapperTest.email + new Random().nextInt();
-            String password = ObjectMapperTest.password + new Random().nextInt();
-            //LocalDate birthday = ObjectMapperTest.birthday.minusDays(new Random().nextInt());
+            String name = firstStudentName + new Random().nextInt();
+            String email = firstStudentEmail + new Random().nextInt();
+            String password = firstStudentPassword + new Random().nextInt();
             int courseId = new Random().nextInt();
 
             Student student = new Student();
@@ -590,7 +454,6 @@ class ObjectMapperTest {
             student.setName(name);
             student.setEmail(email);
             student.setPassword(password);
-            //student.setBirthday(birthday);
             student.setCourseId(courseId);
 
             StudentDTO studentDTO = new StudentDTO();
@@ -598,16 +461,14 @@ class ObjectMapperTest {
             studentDTO.setName(student.getName());
             studentDTO.setEmail(student.getEmail());
             studentDTO.setPassword(student.getPassword());
-            //studentDTO.setBirthday(student.getBirthday());
             studentDTO.setCourseId(student.getCourseId());
 
             assertEquals(id, studentDTO.getId());
             assertEquals(name, studentDTO.getName());
             assertEquals(email, studentDTO.getEmail());
             assertEquals(password, studentDTO.getPassword());
-            //assertEquals(birthday, studentDTO.getBirthday());
             assertEquals(courseId, studentDTO.getCourseId());
-        //}
+        }
 
         long end = System.nanoTime();
 

@@ -7,6 +7,15 @@ public class CourseWithList extends Course {
 
     private List<Student> studentList;
 
+    public CourseWithList() {
+        super();
+    }
+
+    public CourseWithList(Course course, List<Student> studentList) {
+        super(course.getId(), course.getName());
+        this.studentList = studentList;
+    }
+
     public List<Student> getStudentList() {
         return studentList;
     }

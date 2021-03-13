@@ -7,6 +7,15 @@ public class CourseWitListDTO extends CourseDTO {
 
     private List<StudentDTOFull> studentDTOList;
 
+    public CourseWitListDTO() {
+        super();
+    }
+
+    public CourseWitListDTO(CourseDTO courseDTO, List<StudentDTOFull> studentDTOList) {
+        super(courseDTO.getId(), courseDTO.getName());
+        this.studentDTOList = studentDTOList;
+    }
+
     public List<StudentDTOFull> getStudentDTOList() {
         return studentDTOList;
     }
