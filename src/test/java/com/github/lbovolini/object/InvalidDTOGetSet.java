@@ -2,7 +2,7 @@ package com.github.lbovolini.object;
 
 public class InvalidDTOGetSet {
 
-    int i;
+    private int i;
 
     public int getDto() {
         return i;

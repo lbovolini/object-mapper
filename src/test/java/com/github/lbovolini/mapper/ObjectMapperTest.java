@@ -8,7 +8,6 @@ import com.github.lbovolini.object.InvalidGetSet;
 import com.github.lbovolini.object.ObjectBool;
 import com.github.lbovolini.primitive.PrimitiveBool;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.util.*;
 
@@ -84,7 +83,7 @@ class ObjectMapperTest {
     void shouldThrowExceptionWhenClassDoesNotHaveAccessibleNonParametrizedConstructor() {
 
         class PrimitiveInt {
-            int i;
+            private int i;
 
             public int getI() {
                 return i;
@@ -96,7 +95,7 @@ class ObjectMapperTest {
         }
 
         class ObjectInt {
-            Integer i;
+            private Integer i;
 
             public Integer getI() {
                 return i;

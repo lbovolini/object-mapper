@@ -2,8 +2,8 @@ package com.github.lbovolini.object;
 
 public class InvalidGetSet {
 
-    int i;
-    int dto;
+    private int i;
+    private int dto;
 
     public int get() {
         return i;

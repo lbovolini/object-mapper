@@ -2,7 +2,7 @@ package com.github.lbovolini.object;
 
 public class AnotherInvalidGetSet {
 
-    int i;
+    private int i;
 
     public int get() {
         return i;
