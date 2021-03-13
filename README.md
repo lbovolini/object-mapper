@@ -2,17 +2,16 @@
 
 ![CI](https://github.com/lbovolini/object-mapper/workflows/CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/lbovolini/object-mapper/badge.svg?branch=master)](https://coveralls.io/github/lbovolini/object-mapper?branch=master) [![Maven Central](https://img.shields.io/maven-central/v/com.github.lbovolini/object-mapper.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.lbovolini%22%20AND%20a:%22object-mapper%22) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
 Maps an object to another via getters and setters methods
 
 ## Features
 
-- Maps DTO to Model/Entity object
-- Maps Model/Entity to DTO object
-- Maps nested objects
-- Maps nested Lists, Sets and Maps
-- Can map any object to any object if it follows the restrictions
-- Caches objects getters and setters methods for improve performance
+  - Maps DTO to Model/Entity object
+  - Maps Model/Entity to DTO object
+  - Maps nested objects
+  - Maps nested Lists, Sets and Maps
+  - Can map any object to any object if it follows the restrictions
+  - Caches objects getters and setters methods for improve performance
 
 ## Restrictions
 
@@ -20,7 +19,7 @@ Maps only corresponding origin object field if it have getter method and destina
 
 ## Requirements
 
-- Java 1.7+
+  - Java 1.7+
 
 ## Examples
 
