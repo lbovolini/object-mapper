@@ -1,5 +1,7 @@
 package com.github.lbovolini.mapper;
 
+import com.github.lbovolini.exception.UncheckedReflectiveOperationException;
+
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -211,11 +213,9 @@ public class ObjectMapper {
         try {
             Constructor<?> constructor = aClass.getConstructor();
             return constructor.newInstance();
-        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ReflectiveOperationException e) {
+            throw new UncheckedReflectiveOperationException("Error while creating instance of given class. Maybe it does not have accessible non parametrized constructor");
         }
-
-        return null;
     }
 
     // remove get or set prefix

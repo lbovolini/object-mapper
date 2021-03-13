@@ -6,6 +6,15 @@ public class StudentWithCourseWithListWithSelfDTO extends StudentDTO {
 
     private CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO;
 
+    public StudentWithCourseWithListWithSelfDTO() {
+        super();
+    }
+
+    public StudentWithCourseWithListWithSelfDTO(StudentDTO studentDTO, CourseWithListWithStudentWithSelfDTO courseWithListWithStudentWithSelfDTO) {
+        super(studentDTO.getId(), studentDTO.getName(), studentDTO.getEmail(), studentDTO.getPassword(), studentDTO.getCourseId());
+        this.courseWithListWithStudentWithSelfDTO = courseWithListWithStudentWithSelfDTO;
+    }
+
     public CourseWithListWithStudentWithSelfDTO getCourseWithListWithStudentWithSelfDTO() {
         return courseWithListWithStudentWithSelfDTO;
     }

@@ -10,6 +10,17 @@ public class StudentDTO {
     private String password;
     private int courseId;
 
+    public StudentDTO() {
+    }
+
+    public StudentDTO(int id, String name, String email, String password, int courseId) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.courseId = courseId;
+    }
+
     public int getId() {
         return id;
     }

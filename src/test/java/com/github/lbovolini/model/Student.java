@@ -8,10 +8,25 @@ public class Student {
     private String name;
     private String email;
     private String password;
-    //private LocalDate birthday;
     private int courseId;
 
     private Course course;
+
+    public Student() {
+    }
+
+    public Student(int id, String name, String email, String password, int courseId) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.courseId = courseId;
+    }
+
+    public Student(int id, String name, String email, String password, int courseId, Course course) {
+        this(id, name, email, password, courseId);
+        this.course = course;
+    }
 
     public int getId() {
         return id;
