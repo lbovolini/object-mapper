@@ -11,13 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ObjectMapper {
 
-    private static final Map<String, Map<String, Method>> cacheGetters;
-    private static final Map<String, Map<String, Method>> cacheSetters;
-
-    static {
-        cacheGetters = new ConcurrentHashMap<>();
-        cacheSetters = new ConcurrentHashMap<>();
-    }
+    private static final Map<String, Map<String, Method>> cacheGetters = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Method>> cacheSetters = new ConcurrentHashMap<>();
 
     public static <T> T map(final Object object, final Class<?> aClass) {
         return map(object, aClass, new HashSet<String>());
